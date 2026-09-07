@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="busGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Brand Icon Badge -->
+  <g transform="translate(10, 10)">
+    <rect x="0" y="0" width="100" height="100" rx="24" fill="url(#logoGrad)" filter="url(#dropShadow)"/>
+    <circle cx="50" cy="52" r="28" fill="#FEF08A" opacity="0.3"/>
+    <path d="M16 75 Q 35 48, 55 75 Z" fill="#10B981" opacity="0.6"/>
+    <path d="M42 75 Q 65 52, 84 75 Z" fill="#047857" opacity="0.8"/>
+    <path d="M35 96 L 42 72 L 58 72 L 65 96 Z" fill="#374151"/>
+    <line x1="50" y1="74" x2="50" y2="94" stroke="#FDE047" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <g transform="translate(25, 32)">
+      <rect x="2" y="6" width="46" height="38" rx="8" fill="url(#busGrad)"/>
+      <rect x="4" y="8" width="42" height="12" rx="4" fill="#F8FAFC"/>
+      <rect x="6" y="10" width="38" height="9" rx="3" fill="#0284C7"/>
+      <rect x="15" y="2" width="20" height="6" rx="2" fill="#1E293B"/>
+      <rect x="17" y="3.5" width="16" height="3" rx="1" fill="#FEF08A"/>
+      <circle cx="8" cy="32" r="3.5" fill="url(#goldGrad)"/>
+      <circle cx="42" cy="32" r="3.5" fill="url(#goldGrad)"/>
+      <rect x="18" y="28" width="14" height="2.5" rx="1" fill="#FFFFFF" opacity="0.9"/>
+      <rect x="20" y="32" width="10" height="2" rx="1" fill="#FFFFFF" opacity="0.9"/>
+      <rect x="6" y="42" width="8" height="4" rx="2" fill="#111827"/>
+      <rect x="36" y="42" width="8" height="4" rx="2" fill="#111827"/>
+      <circle cx="25" cy="-2" r="2.5" fill="#22C55E"/>
+      <circle cx="25" cy="-2" r="5" fill="none" stroke="#22C55E" stroke-width="1" opacity="0.6"/>
+    </g>
+  </g>
+
+  <!-- Typography: maz Gaaav -->
+  <g transform="translate(125, 22)">
+    <text x="0" y="44" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#0F172A" letter-spacing="-1">
+      maz <tspan fill="#059669">Gaaav</tspan>
+    </text>
+    <rect x="0" y="58" width="84" height="22" rx="6" fill="#FEF3C7"/>
+    <text x="9" y="73" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="700" font-size="12" fill="#B45309">
+      माझं गाव
+    </text>
+    <text x="96" y="73" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="600" font-size="13" fill="#64748B">
+      • गाव बस लाईव्ह ट्रॅकर &amp; टाईमटेबल
+    </text>
+  </g>
+</svg>

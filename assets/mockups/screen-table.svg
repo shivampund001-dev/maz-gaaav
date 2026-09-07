@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 760" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="18%" stop-color="#047857"/>
+      <stop offset="18%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="380" height="760" rx="36" fill="url(#bgGrad2)"/>
+
+  <!-- Status Bar -->
+  <g fill="#FFFFFF" opacity="0.9" font-family="system-ui, sans-serif" font-size="12">
+    <text x="32" y="28" font-weight="600">10:45</text>
+    <g transform="translate(305, 18)" fill="#FFFFFF">
+      <rect x="0" y="8" width="3" height="4" rx="0.5"/>
+      <rect x="4" y="6" width="3" height="6" rx="0.5"/>
+      <rect x="8" y="3" width="3" height="9" rx="0.5"/>
+      <rect x="12" y="0" width="3" height="12" rx="0.5"/>
+      <rect x="22" y="1" width="18" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+      <rect x="24" y="3" width="12" height="6" rx="1" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(24, 46)">
+    <text x="0" y="24" fill="#FFFFFF" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="800" font-size="20">वेळापत्रक (माहूर &amp; किनवट)</text>
+    <text x="0" y="44" fill="#A7F3D0" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-size="12">किनवट आगार &amp; माहूर बस स्थानक वेळापत्रक</text>
+  </g>
+
+  <!-- Filter tabs -->
+  <g transform="translate(20, 120)">
+    <rect x="0" y="0" width="80" height="32" rx="16" fill="#059669"/>
+    <text x="16" y="20" fill="#FFFFFF" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="12">सर्व बसेस</text>
+
+    <rect x="88" y="0" width="80" height="32" rx="16" fill="#E2E8F0"/>
+    <text x="110" y="20" fill="#475569" font-family="'Noto Sans Devanagari', system-ui" font-weight="600" font-size="12">सकाळ</text>
+
+    <rect x="176" y="0" width="80" height="32" rx="16" fill="#E2E8F0"/>
+    <text x="200" y="20" fill="#475569" font-family="'Noto Sans Devanagari', system-ui" font-weight="600" font-size="12">दुपार</text>
+
+    <rect x="264" y="0" width="76" height="32" rx="16" fill="#E2E8F0"/>
+    <text x="278" y="20" fill="#475569" font-family="'Noto Sans Devanagari', system-ui" font-weight="600" font-size="12">संध्याकाळ</text>
+  </g>
+
+  <!-- Timetable List -->
+  <g transform="translate(20, 175)">
+    <!-- Row 1: Kinwat to Mahur -->
+    <g transform="translate(0, 0)">
+      <rect width="340" height="88" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="16" y="14" width="60" height="24" rx="6" fill="#FEE2E2"/>
+      <text x="24" y="30" fill="#DC2626" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="12">लालपरी</text>
+      <text x="86" y="31" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="15">सकाळी ०६:३०</text>
+      <text x="16" y="56" fill="#1E293B" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">किनवट आगार ➔ बोधडी ➔ माहूर</text>
+      <text x="16" y="74" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">रोज धावणारी पहिली फेरी • सर्व थांबे</text>
+      <circle cx="310" cy="44" r="14" fill="#ECFDF5"/>
+      <text x="304" y="49" fill="#059669" font-size="14">➔</text>
+    </g>
+
+    <!-- Row 2: Mahur to Nanded via Kinwat -->
+    <g transform="translate(0, 102)">
+      <rect width="340" height="88" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="16" y="14" width="68" height="24" rx="6" fill="#E0E7FF"/>
+      <text x="22" y="30" fill="#4338CA" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="12">एक्सप्रेस</text>
+      <text x="94" y="31" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="15">सकाळी ०८:००</text>
+      <text x="16" y="56" fill="#1E293B" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">माहूर ➔ किनवट ➔ हिमायतनगर ➔ नांदेड</text>
+      <text x="16" y="74" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">जलद बस फेरी • आरक्षण उपलब्ध</text>
+      <circle cx="310" cy="44" r="14" fill="#ECFDF5"/>
+      <text x="304" y="49" fill="#059669" font-size="14">➔</text>
+    </g>
+
+    <!-- Row 3: Kinwat to Mahurgad Bhakt Pheri -->
+    <g transform="translate(0, 204)">
+      <rect width="340" height="88" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="16" y="14" width="76" height="24" rx="6" fill="#FEF3C7"/>
+      <text x="22" y="30" fill="#B45309" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="12">भक्त फेरी</text>
+      <text x="100" y="31" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="15">सकाळी ०९:३०</text>
+      <text x="16" y="56" fill="#1E293B" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">किनवट ➔ सिंदखेड ➔ माहूर रेणुका मंदिर</text>
+      <text x="16" y="74" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">शक्तिपीठ दर्शनार्थ भाविकांसाठी थेट बस</text>
+      <circle cx="310" cy="44" r="14" fill="#ECFDF5"/>
+      <text x="304" y="49" fill="#059669" font-size="14">➔</text>
+    </g>
+
+    <!-- Row 4: Mahur to Kinwat Return -->
+    <g transform="translate(0, 306)">
+      <rect width="340" height="88" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="16" y="14" width="60" height="24" rx="6" fill="#FEE2E2"/>
+      <text x="24" y="30" fill="#DC2626" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="12">लालपरी</text>
+      <text x="86" y="31" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="15">दुपारी ०२:१५</text>
+      <text x="16" y="56" fill="#1E293B" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">माहूर बस स्थानक ➔ बोधडी ➔ किनवट</text>
+      <text x="16" y="74" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">दुपारची नियमित फेरी • किनवट आगार</text>
+      <circle cx="310" cy="44" r="14" fill="#ECFDF5"/>
+      <text x="304" y="49" fill="#059669" font-size="14">➔</text>
+    </g>
+  </g>
+
+  <!-- Banner -->
+  <g transform="translate(20, 595)">
+    <rect width="340" height="50" rx="12" fill="#ECFDF5" stroke="#6EE7B7"/>
+    <text x="20" y="30" font-size="16">💾</text>
+    <text x="46" y="24" fill="#065F46" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="11">ऑफलाईन सेव्ह केले आहे</text>
+    <text x="46" y="38" fill="#047857" font-family="'Noto Sans Devanagari', system-ui" font-size="10">माहूर व किनवटचे वेळापत्रक इंटरनेट नसले तरी दिसेल!</text>
+  </g>
+
+  <!-- Bottom Nav -->
+  <g transform="translate(0, 690)">
+    <rect width="380" height="70" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="52" y="32" font-size="14">🏠</text>
+    <text x="46" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">लाईव्ह</text>
+
+    <circle cx="150" cy="26" r="16" fill="#ECFDF5"/>
+    <text x="142" y="32" font-size="14">📅</text>
+    <text x="130" y="52" font-size="10" fill="#059669" font-family="'Noto Sans Devanagari', system-ui" font-weight="700">वेळापत्रक</text>
+
+    <text x="238" y="32" font-size="14">🗺️</text>
+    <text x="231" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">मार्ग</text>
+
+    <text x="322" y="32" font-size="14">👤</text>
+    <text x="310" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">माझं गाव</text>
+  </g>
+</svg>

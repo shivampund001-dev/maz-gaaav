@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 760" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="18%" stop-color="#047857"/>
+      <stop offset="18%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+    <filter id="shadow3" x="-10%" y="-5%" width="120%" height="115%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="380" height="760" rx="36" fill="url(#bgGrad3)"/>
+
+  <!-- Status Bar -->
+  <g fill="#FFFFFF" opacity="0.9" font-family="system-ui, sans-serif" font-size="12">
+    <text x="32" y="28" font-weight="600">10:45</text>
+    <g transform="translate(305, 18)" fill="#FFFFFF">
+      <rect x="0" y="8" width="3" height="4" rx="0.5"/>
+      <rect x="4" y="6" width="3" height="6" rx="0.5"/>
+      <rect x="8" y="3" width="3" height="9" rx="0.5"/>
+      <rect x="12" y="0" width="3" height="12" rx="0.5"/>
+      <rect x="22" y="1" width="18" height="10" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+      <rect x="24" y="3" width="12" height="6" rx="1" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(24, 46)">
+    <text x="0" y="24" fill="#FFFFFF" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="800" font-size="20">माहूर-किनवट सूचना फलक</text>
+    <text x="0" y="44" fill="#A7F3D0" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-size="12">किनवट आगार &amp; माहूर थेट डेपो अपडेट्स</text>
+  </g>
+
+  <!-- Floating Notification Popup -->
+  <g transform="translate(16, 120)" filter="url(#shadow3)">
+    <rect width="348" height="135" rx="18" fill="#1E293B"/>
+    <rect x="16" y="14" width="22" height="22" rx="6" fill="#059669"/>
+    <text x="21" y="30" font-size="12">🚌</text>
+    <text x="46" y="29" fill="#F8FAFC" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="700" font-size="13">maz Gaaav • बस आगमन अलर्ट</text>
+    <text x="300" y="29" fill="#94A3B8" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-size="10">आत्ताच</text>
+
+    <text x="16" y="62" fill="#FEF08A" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="800" font-size="15">🔔 किनवट-माहूर बस ५ मिनिटांत येत आहे!</text>
+    <text x="16" y="84" fill="#E2E8F0" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-size="12">गाडी क्र. MH-26-B-4218 बोधडी फाटा ओलांडून माहूर पायथ्याकडे निघाली आहे. कृपया थांब्यावर हजर रहा.</text>
+
+    <line x1="16" y1="98" x2="332" y2="98" stroke="#334155"/>
+    <text x="36" y="118" fill="#34D399" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="700" font-size="12">📍 नकाशावर पाहा</text>
+    <text x="220" y="118" fill="#94A3B8" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="600" font-size="12">अलार्म बंद करा</text>
+  </g>
+
+  <!-- Notification Feed list -->
+  <g transform="translate(20, 280)">
+    <text x="4" y="16" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui, sans-serif" font-weight="800" font-size="16">महत्त्वाच्या सूचना (डेपो अपडेट्स)</text>
+
+    <!-- Alert 1 -->
+    <g transform="translate(0, 30)">
+      <rect width="340" height="96" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="14" y="14" width="95" height="22" rx="6" fill="#ECFDF5"/>
+      <text x="22" y="29" fill="#059669" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="11">✨ भाविक विशेष</text>
+      <text x="118" y="29" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">माहूर गड दर्शन</text>
+      <text x="14" y="56" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">पौर्णिमा निमित्त किनवट-माहूर जादा बसेस सुरू</text>
+      <text x="14" y="76" fill="#475569" font-family="'Noto Sans Devanagari', system-ui" font-size="11">रेणुका देवी दर्शनासाठी दर तासाला किनवट वरून बस सुटेल.</text>
+    </g>
+
+    <!-- Alert 2 -->
+    <g transform="translate(0, 138)">
+      <rect width="340" height="96" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="14" y="14" width="85" height="22" rx="6" fill="#FEF3C7"/>
+      <text x="22" y="29" fill="#B45309" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="11">⚠️ वेळ बदल</text>
+      <text x="108" y="29" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui" font-size="11">नांदेड मार्ग</text>
+      <text x="14" y="56" fill="#0F172A" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="13">माहूर-किनवट-नांदेड सकाळची फेरी वेळेत बदल</text>
+      <text x="14" y="76" fill="#475569" font-family="'Noto Sans Devanagari', system-ui" font-size="11">आता ही बस सकाळी ०७:४५ ऐवजी ०८:०० वाजता सुटेल.</text>
+    </g>
+
+    <!-- Emergency Helpline Card -->
+    <g transform="translate(0, 246)">
+      <rect width="340" height="110" rx="16" fill="#EFF6FF" stroke="#BFDBFE"/>
+      <text x="16" y="28" fill="#1E40AF" font-family="'Noto Sans Devanagari', system-ui" font-weight="800" font-size="14">📞 किनवट &amp; माहूर डेपो संपर्क क्रमांक</text>
+      <text x="16" y="50" fill="#3B82F6" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="12">किनवट बस आगार: ०२४६९-२२२०४२</text>
+      <text x="16" y="70" fill="#3B82F6" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="12">माहूर बस स्थानक: ०२४६०-२६८२३०</text>
+      <rect x="16" y="82" width="145" height="22" rx="6" fill="#2563EB"/>
+      <text x="26" y="97" fill="#FFFFFF" font-family="'Noto Sans Devanagari', system-ui" font-weight="700" font-size="10">डेपो नियंत्रण कक्षाशी बोला ➔</text>
+    </g>
+  </g>
+
+  <!-- Bottom Nav -->
+  <g transform="translate(0, 690)">
+    <rect width="380" height="70" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="52" y="32" font-size="14">🏠</text>
+    <text x="46" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">लाईव्ह</text>
+
+    <text x="142" y="32" font-size="14">📅</text>
+    <text x="130" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">वेळापत्रक</text>
+
+    <text x="238" y="32" font-size="14">🗺️</text>
+    <text x="231" y="52" font-size="10" fill="#64748B" font-family="'Noto Sans Devanagari', system-ui">मार्ग</text>
+
+    <circle cx="330" cy="26" r="16" fill="#ECFDF5"/>
+    <text x="322" y="32" font-size="14">🔔</text>
+    <text x="314" y="52" font-size="10" fill="#059669" font-family="'Noto Sans Devanagari', system-ui" font-weight="700">अलर्ट्स</text>
+  </g>
+</svg>
