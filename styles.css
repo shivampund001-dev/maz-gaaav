@@ -1,6 +1,7 @@
 /* =========================================================
    maz Gaaav Landing Page Stylesheet
    Theme: Vibrant Rural Transport (Emerald & Lalpari ST Red)
+   100% Fully Responsive for All Mobile Devices
    ========================================================= */
 
 :root {
@@ -48,6 +49,13 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
@@ -57,7 +65,6 @@ html {
 }
 
 body {
-  overflow-x: hidden;
   min-height: 100vh;
 }
 
@@ -74,6 +81,13 @@ h1, h2, h3, h4 {
   font-weight: 800;
   line-height: 1.25;
   color: var(--text-main);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+p, span, a, li {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 a {
@@ -90,12 +104,16 @@ a {
   text-align: center;
   font-size: 0.85rem;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  flex-wrap: wrap;
+  line-height: 1.4;
+  width: 100%;
 }
+
 .top-notice-bar .pulse-dot {
   width: 8px;
   height: 8px;
@@ -104,6 +122,7 @@ a {
   box-shadow: 0 0 8px #34D399;
   display: inline-block;
   animation: pulse 2s infinite;
+  flex-shrink: 0;
 }
 
 @keyframes pulse {
@@ -119,43 +138,48 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-light);
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .nav-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 74px;
+  height: 70px;
+  gap: 12px;
 }
 
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
-  height: 48px;
+  height: 42px;
   width: auto;
+  max-width: 140px;
   object-fit: contain;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   list-style: none;
 }
 
 .nav-links a {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-muted);
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -165,21 +189,23 @@ a {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .btn-nav-download {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #FFFFFF;
-  padding: 10px 20px;
+  padding: 8px 18px;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   box-shadow: var(--shadow-sm);
   transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .btn-nav-download:hover {
@@ -194,6 +220,7 @@ a {
   font-size: 1.6rem;
   cursor: pointer;
   color: var(--text-main);
+  padding: 4px;
 }
 
 /* =========================================================
@@ -201,17 +228,19 @@ a {
    ========================================================= */
 .hero-section {
   position: relative;
-  padding: 60px 0 80px;
+  padding: 40px 0 60px;
   overflow: hidden;
   background: radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
               radial-gradient(circle at 85% 60%, rgba(220, 38, 38, 0.05) 0%, transparent 40%);
+  width: 100%;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
-  gap: 40px;
+  gap: 36px;
+  width: 100%;
 }
 
 .hero-badge {
@@ -221,18 +250,21 @@ a {
   background: var(--primary-subtle);
   border: 1px solid var(--primary-border);
   color: var(--primary-dark);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+  max-width: 100%;
+  flex-wrap: wrap;
+  line-height: 1.3;
 }
 
 .hero-title {
-  font-size: 2.8rem;
+  font-size: clamp(1.6rem, 4.2vw, 2.8rem);
   letter-spacing: -0.02em;
-  margin-bottom: 18px;
-  line-height: 1.2;
+  margin-bottom: 16px;
+  line-height: 1.25;
 }
 
 .hero-title .highlight {
@@ -245,41 +277,41 @@ a {
 }
 
 .hero-desc {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   color: var(--text-muted);
-  margin-bottom: 30px;
-  line-height: 1.7;
+  margin-bottom: 24px;
+  line-height: 1.65;
 }
 
 /* CTA Download Block */
 .cta-download-box {
   background: #FFFFFF;
-  padding: 24px;
+  padding: 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-md);
-  margin-bottom: 24px;
-  display: inline-block;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 540px;
+  max-width: 520px;
 }
 
 .cta-button-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
 }
 
 .btn-primary-download {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #FFFFFF;
-  padding: 16px 28px;
+  padding: 14px 20px;
   border-radius: var(--radius-md);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   box-shadow: var(--shadow-glow);
   transition: all 0.3s ease;
@@ -288,37 +320,43 @@ a {
   border: none;
   cursor: pointer;
   text-align: left;
+  width: 100%;
+  max-width: 100%;
 }
 
 .btn-primary-download:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 36px rgba(5, 150, 105, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(5, 150, 105, 0.45);
   background: linear-gradient(135deg, #10B981 0%, #059669 100%);
 }
 
 .btn-icon-svg {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   flex-shrink: 0;
 }
 
 .btn-text-block {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .btn-sub-label {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.9;
+  white-space: normal;
 }
 
 .btn-main-label {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: 900;
   letter-spacing: -0.01em;
+  line-height: 1.25;
+  white-space: normal;
 }
 
 .apk-meta-specs {
@@ -326,11 +364,11 @@ a {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px dashed var(--border-light);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-subtle);
   font-weight: 600;
 }
@@ -338,7 +376,8 @@ a {
 .apk-spec-item {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -349,43 +388,49 @@ a {
   background: #F8FAFC;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 14px;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
+  width: 100%;
 }
 
 .qr-image-wrapper {
   background: #FFFFFF;
-  padding: 8px;
-  border-radius: 12px;
+  padding: 6px;
+  border-radius: 10px;
   border: 1px solid #CBD5E1;
   box-shadow: var(--shadow-sm);
   flex-shrink: 0;
 }
 
 .qr-code-img {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   display: block;
 }
 
+.qr-text-block {
+  min-width: 0;
+  flex: 1;
+}
+
 .qr-text-block h5 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: var(--text-main);
   margin-bottom: 4px;
 }
 
 .qr-text-block p {
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.4;
-  margin-bottom: 8px;
+  line-height: 1.35;
+  margin-bottom: 6px;
 }
 
 .btn-qr-download-link {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--primary);
   display: inline-flex;
@@ -401,17 +446,19 @@ a {
 .trust-badges-row {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-top: 18px;
-  font-size: 0.88rem;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 0.84rem;
   color: var(--text-muted);
   font-weight: 600;
+  flex-wrap: wrap;
 }
 
 .trust-badges-row span {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -422,6 +469,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .phone-screen-tabs {
@@ -429,19 +477,20 @@ a {
   background: #E2E8F0;
   padding: 4px;
   border-radius: var(--radius-full);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   gap: 4px;
-  max-width: 360px;
+  max-width: 320px;
   width: 100%;
+  justify-content: center;
 }
 
 .screen-tab-btn {
   flex: 1;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: none;
   background: transparent;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
@@ -457,28 +506,29 @@ a {
 }
 
 .phone-device-chassis {
-  width: 320px;
-  max-width: 100%;
+  width: 290px;
+  max-width: 90vw;
   background: #1E293B;
-  padding: 12px;
-  border-radius: 46px;
-  box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.4),
+  padding: 10px;
+  border-radius: 40px;
+  box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.4),
               0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   position: relative;
   transition: transform 0.4s ease;
+  margin: 0 auto;
 }
 
 .phone-device-chassis:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
 }
 
 .phone-camera-notch {
-  width: 90px;
-  height: 20px;
+  width: 80px;
+  height: 18px;
   background: #0F172A;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 10px 10px;
   position: absolute;
-  top: 12px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -486,10 +536,11 @@ a {
 
 .phone-screen-display {
   background: #000;
-  border-radius: 36px;
+  border-radius: 32px;
   overflow: hidden;
   aspect-ratio: 9 / 18;
   position: relative;
+  width: 100%;
 }
 
 .mockup-img {
@@ -514,44 +565,48 @@ a {
    Features Grid Section
    ========================================================= */
 .features-section {
-  padding: 90px 0;
+  padding: 60px 0;
+  width: 100%;
 }
 
 .section-header-center {
   text-align: center;
   max-width: 680px;
-  margin: 0 auto 60px;
+  margin: 0 auto 40px;
+  padding: 0 10px;
 }
 
 .section-tag {
   color: var(--primary);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   display: inline-block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .section-title {
-  font-size: 2.3rem;
-  margin-bottom: 14px;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  margin-bottom: 12px;
+  line-height: 1.25;
 }
 
 .section-desc {
   color: var(--text-muted);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 22px;
+  width: 100%;
 }
 
 .feature-card {
   background: var(--bg-card);
-  padding: 32px 26px;
+  padding: 26px 20px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
@@ -560,20 +615,20 @@ a {
 }
 
 .feature-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: var(--primary-border);
 }
 
 .feature-icon-badge {
-  width: 58px;
-  height: 58px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
   background: var(--primary-subtle);
   color: var(--primary-dark);
 }
@@ -589,37 +644,39 @@ a {
 }
 
 .feature-card h4 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
   color: var(--text-main);
 }
 
 .feature-card p {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 /* =========================================================
    Screenshots Carousel / Grid
    ========================================================= */
 .screenshots-section {
-  padding: 90px 0;
+  padding: 60px 0;
   background: linear-gradient(180deg, #F1F5F9 0%, #FFFFFF 100%);
   border-top: 1px solid var(--border-light);
+  width: 100%;
 }
 
 .screenshots-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 24px;
   align-items: start;
+  width: 100%;
 }
 
 .screenshot-item {
   background: #FFFFFF;
   border-radius: var(--radius-xl);
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-md);
   text-align: center;
@@ -627,32 +684,32 @@ a {
 }
 
 .screenshot-item:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
 .screenshot-preview-box {
   background: #1E293B;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  padding: 8px;
-  margin-bottom: 16px;
+  padding: 6px;
+  margin-bottom: 12px;
 }
 
 .screenshot-preview-box img {
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 14px;
   display: block;
 }
 
 .screenshot-item h4 {
-  font-size: 1.15rem;
-  margin-bottom: 6px;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
   color: var(--text-main);
 }
 
 .screenshot-item p {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
 }
 
@@ -660,85 +717,90 @@ a {
    Step-by-Step Installation Instructions
    ========================================================= */
 .install-section {
-  padding: 90px 0;
+  padding: 60px 0;
   background: #FFFFFF;
+  width: 100%;
 }
 
 .install-steps-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-bottom: 40px;
+  gap: 24px;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .install-step-card {
   background: var(--bg-page);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 32px 24px;
+  padding: 26px 18px;
   position: relative;
 }
 
 .step-num-pill {
   position: absolute;
-  top: -16px;
-  left: 24px;
+  top: -14px;
+  left: 20px;
   background: var(--primary);
   color: #FFFFFF;
   font-weight: 900;
-  font-size: 0.9rem;
-  padding: 4px 14px;
+  font-size: 0.85rem;
+  padding: 3px 12px;
   border-radius: var(--radius-full);
   box-shadow: 0 2px 8px rgba(5,150,105,0.3);
 }
 
 .step-icon {
-  font-size: 2.2rem;
-  margin-bottom: 16px;
+  font-size: 2rem;
+  margin-bottom: 14px;
   display: inline-block;
 }
 
 .install-step-card h4 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
 }
 
 .install-step-card p {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .install-note-box {
   background: #FFFBEB;
   border: 1px solid #FCD34D;
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 14px 18px;
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 12px;
   max-width: 860px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .install-note-box .note-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #B45309;
+  flex-shrink: 0;
 }
 
 .install-note-box p {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: #92400E;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 /* =========================================================
    FAQ Section
    ========================================================= */
 .faq-section {
-  padding: 80px 0;
+  padding: 60px 0;
   background: var(--bg-page);
   border-top: 1px solid var(--border-light);
+  width: 100%;
 }
 
 .faq-list {
@@ -746,7 +808,8 @@ a {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  width: 100%;
 }
 
 .faq-item {
@@ -761,22 +824,24 @@ a {
   width: 100%;
   background: none;
   border: none;
-  padding: 20px 24px;
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: var(--text-main);
   text-align: left;
   cursor: pointer;
   font-family: inherit;
+  gap: 10px;
 }
 
 .faq-toggle-icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--primary);
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .faq-item.active .faq-toggle-icon {
@@ -787,42 +852,47 @@ a {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
-  padding: 0 24px;
+  padding: 0 20px;
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .faq-item.active .faq-answer {
   max-height: 300px;
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 
 /* =========================================================
    Bottom Download Callout
    ========================================================= */
 .bottom-cta-section {
-  padding: 70px 0;
+  padding: 50px 0;
   background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
   color: #FFFFFF;
   text-align: center;
   position: relative;
   overflow: hidden;
+  width: 100%;
+}
+
+.bottom-cta-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .bottom-cta-box h2 {
   color: #FFFFFF;
-  font-size: 2.4rem;
-  margin-bottom: 14px;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  margin-bottom: 12px;
 }
 
 .bottom-cta-box p {
   color: #A7F3D0;
-  font-size: 1.1rem;
-  margin-bottom: 28px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1rem;
+  margin-bottom: 24px;
+  line-height: 1.55;
 }
 
 /* =========================================================
@@ -831,34 +901,36 @@ a {
 .footer {
   background: #0F172A;
   color: #94A3B8;
-  padding: 60px 0 30px;
-  font-size: 0.92rem;
+  padding: 50px 0 26px;
+  font-size: 0.88rem;
+  width: 100%;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .footer-brand p {
-  margin-top: 14px;
+  margin-top: 12px;
   max-width: 320px;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .footer-col h5 {
   color: #FFFFFF;
-  font-size: 1.05rem;
-  margin-bottom: 18px;
+  font-size: 0.98rem;
+  margin-bottom: 14px;
 }
 
 .footer-links {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .footer-links a {
@@ -870,33 +942,35 @@ a {
 }
 
 .footer-bottom {
-  padding-top: 24px;
+  padding-top: 20px;
   border-top: 1px solid #1E293B;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
+  font-size: 0.82rem;
 }
 
 /* Download Toast Notification */
 .download-toast {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 20px;
   background: #0F172A;
   color: #FFFFFF;
-  padding: 16px 22px;
+  padding: 14px 18px;
   border-radius: var(--radius-md);
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   z-index: 999;
   transform: translateY(120px);
   opacity: 0;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   border-left: 4px solid var(--primary);
+  max-width: calc(100vw - 40px);
 }
 
 .download-toast.show {
@@ -905,36 +979,33 @@ a {
 }
 
 /* =========================================================
-   Responsive Breakpoints
+   Full Responsive Breakpoints
    ========================================================= */
 @media (max-width: 992px) {
   .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
-  }
-  .hero-title {
-    font-size: 2.4rem;
+    gap: 30px;
   }
   .cta-download-box {
     margin-left: auto;
     margin-right: auto;
   }
-  .qr-download-card {
-    text-align: left;
-  }
   .trust-badges-row {
     justify-content: center;
   }
   .phone-mockup-wrap {
-    margin-top: 30px;
+    margin-top: 10px;
   }
   .features-grid,
   .screenshots-grid,
   .install-steps-container {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
@@ -945,51 +1016,83 @@ a {
   .mobile-toggle {
     display: block;
   }
+  .btn-nav-download {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+  .nav-container {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 14px;
+  }
+  .top-notice-bar {
+    font-size: 0.76rem;
+    padding: 8px 10px;
+  }
+  .hero-section {
+    padding: 24px 0 40px;
+  }
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.65rem;
+    line-height: 1.25;
+  }
+  .hero-badge {
+    font-size: 0.74rem;
+    padding: 4px 10px;
+  }
+  .cta-download-box {
+    padding: 16px 12px;
+  }
+  .btn-primary-download {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .btn-icon-svg {
+    width: 28px;
+    height: 28px;
   }
   .btn-main-label {
     font-size: 1.05rem;
   }
+  .apk-meta-specs {
+    font-size: 0.75rem;
+    justify-content: center;
+    gap: 12px;
+  }
+  .qr-download-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px 10px;
+  }
+  .phone-screen-tabs {
+    max-width: 100%;
+  }
+  .screen-tab-btn {
+    font-size: 0.72rem;
+    padding: 6px 6px;
+  }
   .phone-device-chassis {
-    width: 280px;
+    width: 260px;
+    max-width: 85vw;
+    border-radius: 34px;
+    padding: 8px;
   }
-}
-
-
-/* --- Mobile Overflow Fix --- */
-html, body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1, h2, h3, p, span {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-
-@media (max-width: 640px) {
-  h1, .hero-title {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
+  .phone-screen-display {
+    border-radius: 26px;
   }
-  .hero-subtitle, p {
-    font-size: 0.95rem !important;
-    line-height: 1.4 !important;
+  .trust-badges-row {
+    font-size: 0.78rem;
+    gap: 10px;
+    justify-content: center;
   }
-  .container, .hero, .hero-content {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    width: 100% !important;
-    max-width: 100% !important;
+  .feature-card {
+    padding: 20px 16px;
   }
-  .phone-frame {
-    max-width: 280px !important;
-    margin: 20px auto !important;
-    overflow: hidden !important;
+  .install-step-card {
+    padding: 22px 14px;
   }
 }
