@@ -6,328 +6,326 @@ const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-// Secret Admin Password set to 0003 as requested
 const ADMIN_PIN = process.env.ADMIN_PIN || "0003";
 
-// UPI & Premium Download Settings
+// UPI Settings
 const UPI_ID = "shivampund814@oksbi";
-const APP_PRICE = "10.00";
-const PAYEE_NAME = "maz Gaaav App";
+const PAYEE_NAME = "Shivam Pund";
 
 const DOWNLOADS_DIR = path.join(__dirname, "downloads");
 const META_FILE = path.join(DOWNLOADS_DIR, "apk-meta.json");
+const CUSTOM_QR_FILE = path.join(DOWNLOADS_DIR, "custom-qr.png");
 
 // Ensure downloads directory exists
 if (!fs.existsSync(DOWNLOADS_DIR)) {
   fs.mkdirSync(DOWNLOADS_DIR, { recursive: true });
 }
 
-// Helpers for reading/writing metadata
+// Helpers for metadata
 function getMeta() {
   try {
     if (fs.existsSync(META_FILE)) {
       const data = JSON.parse(fs.readFileSync(META_FILE, "utf8"));
-      // Verify physical file actually exists
       if (data.exists && data.filename) {
         const filePath = path.join(DOWNLOADS_DIR, data.filename);
         if (!fs.existsSync(filePath)) {
           data.exists = false;
         }
       }
+      data.hasCustomQr = fs.existsSync(CUSTOM_QR_FILE);
       return data;
     }
-  } catch (err) {
-    console.error("Error reading apk-meta.json:", err);
-  }
+  } catch (e) {}
   return {
     exists: false,
-    filename: "",
-    version: "",
-    sizeBytes: 0,
-    sizeFormatted: "",
-    uploadDate: "",
-    releaseNotes: "",
-    downloadCount: 0
+    filename: null,
+    version: "v1.0.0",
+    size: 0,
+    uploadDate: null,
+    hasCustomQr: fs.existsSync(CUSTOM_QR_FILE)
   };
 }
 
-function saveMeta(meta) {
-  try {
-    fs.writeFileSync(META_FILE, JSON.stringify(meta, null, 2), "utf8");
-  } catch (err) {
-    console.error("Error writing apk-meta.json:", err);
-  }
+function saveMeta(data) {
+  fs.writeFileSync(META_FILE, JSON.stringify(data, null, 2), "utf8");
 }
 
-// Format file size helper
 function formatBytes(bytes) {
   if (!bytes || bytes === 0) return "0 MB";
   const mb = bytes / (1024 * 1024);
   return mb.toFixed(1) + " MB";
 }
 
-// Multer Storage Configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, DOWNLOADS_DIR);
-  },
-  filename: function (req, file, cb) {
-    const safeVersion = (req.body.version || "latest").replace(/[^a-zA-Z0-9.-]/g, "_");
-    const filename = `maz-gaaav-${safeVersion}.apk`;
-    cb(null, filename);
+// Multer storage for APK
+const apkStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, DOWNLOADS_DIR),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    cb(null, `maz-gaaav-${Date.now()}${ext === ".apk" ? ".apk" : ".apk"}`);
   }
 });
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 300 * 1024 * 1024 }, // Max 300 MB
-  fileFilter: function (req, file, cb) {
-    cb(null, true);
-  }
+const uploadApk = multer({
+  storage: apkStorage,
+  limits: { fileSize: 150 * 1024 * 1024 }
 });
 
-// Middleware
+// Multer storage for Custom QR Image
+const qrStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, DOWNLOADS_DIR),
+  filename: (req, file, cb) => cb(null, "custom-qr.png")
+});
+const uploadQr = multer({
+  storage: qrStorage,
+  limits: { fileSize: 15 * 1024 * 1024 }
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname)));
 
-// Serve static assets
-app.use("/assets", express.static(path.join(__dirname, "assets")));
-app.use(express.static(__dirname, { index: false }));
-
-// 1. Public Pages
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-// Private Admin Page (Secret URL)
-app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "admin.html"));
-});
-
-// 2. API: Dynamic QR Code Generation for Direct ₹10 UPI Payment
-app.get("/api/qr-code", async (req, res) => {
-  try {
-    const upiUri = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${APP_PRICE}&cu=INR&tn=${encodeURIComponent("maz Gaaav APK Download")}`;
-
-    const qrSvg = await QRCode.toString(upiUri, {
-      type: "svg",
-      margin: 1,
-      color: {
-        dark: "#0F172A",
-        light: "#FFFFFF"
-      }
-    });
-
-    res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
-    res.setHeader("Cache-Control", "no-cache");
-    res.send(qrSvg);
-  } catch (err) {
-    res.status(500).send("Error generating QR code");
-  }
-});
-
-// Downloadable QR Code PNG for printing posters (₹10 UPI)
-app.get("/api/qr-code/download", async (req, res) => {
-  try {
-    const upiUri = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${APP_PRICE}&cu=INR&tn=${encodeURIComponent("maz Gaaav APK Download")}`;
-
-    const qrBuffer = await QRCode.toBuffer(upiUri, {
-      type: "png",
-      width: 600,
-      margin: 2,
-      color: {
-        dark: "#0F172A",
-        light: "#FFFFFF"
-      }
-    });
-
+// Dynamic QR Code Route (Serves Custom QR if uploaded, else generates on the fly)
+app.get(["/api/qr-image", "/api/qr-code", "/qr.png"], (req, res) => {
+  if (fs.existsSync(CUSTOM_QR_FILE)) {
     res.setHeader("Content-Type", "image/png");
-    res.setHeader("Content-Disposition", 'attachment; filename="maz-gaaav-payment-qr.png"');
-    res.send(qrBuffer);
-  } catch (err) {
-    res.status(500).send("Error generating PNG QR code");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    return res.sendFile(CUSTOM_QR_FILE);
   }
+
+  // Fallback: Generate clean UPI QR
+  const upiUrl = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=10&cu=INR`;
+  QRCode.toBuffer(upiUrl, { width: 400, margin: 2 }, (err, buffer) => {
+    if (err) return res.status(500).send("QR Generation Error");
+    res.setHeader("Content-Type", "image/png");
+    res.send(buffer);
+  });
 });
 
-// 3. API: Verify Admin PIN
-app.post("/api/verify-pin", (req, res) => {
-  const { pin } = req.body;
-  if (pin === ADMIN_PIN) {
-    return res.json({ success: true, message: "PIN verified successfully" });
-  }
-  return res.status(401).json({ success: false, message: "चुकीचा पासवर्ड (Incorrect Password). कृपया पुन्हा प्रयत्न करा." });
-});
-
-// 4. API: Get Current APK & Payment Info
+// APK Info Endpoint
 app.get("/api/apk-info", (req, res) => {
   const meta = getMeta();
   res.json({
-    ...meta,
-    price: `₹${APP_PRICE}`,
-    upiId: UPI_ID,
-    payeeName: PAYEE_NAME,
-    upiUrl: `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(PAYEE_NAME)}&am=${APP_PRICE}&cu=INR&tn=${encodeURIComponent("maz Gaaav APK Download")}`
+    exists: meta.exists,
+    version: meta.version || "v1.0.0",
+    sizeFormatted: formatBytes(meta.size),
+    uploadDate: meta.uploadDate,
+    hasCustomQr: meta.hasCustomQr
   });
 });
 
-// 5. API: Upload APK (Protected by Secret PIN)
-app.post("/api/upload-apk", (req, res) => {
-  upload.single("apkFile")(req, res, (err) => {
-    if (err) {
-      return res.status(400).json({ success: false, message: `अपलोड त्रुटी (Upload Error): ${err.message}` });
-    }
-
-    const pin = req.headers["x-admin-pin"] || req.body.adminPin;
-    if (pin !== ADMIN_PIN) {
-      if (req.file) {
-        fs.unlink(req.file.path, () => {});
-      }
-      return res.status(401).json({ success: false, message: "अनधिकृत प्रवेश! चुकीचा पासवर्ड." });
-    }
-
-    if (!req.file) {
-      return res.status(400).json({ success: false, message: "कृपया APK फाईल निवडा." });
-    }
-
-    const currentMeta = getMeta();
-
-    // If an older different file existed, delete old file to save server space
-    if (currentMeta.exists && currentMeta.filename && currentMeta.filename !== req.file.filename) {
-      const oldFilePath = path.join(DOWNLOADS_DIR, currentMeta.filename);
-      if (fs.existsSync(oldFilePath)) {
-        try { fs.unlinkSync(oldFilePath); } catch (e) {}
-      }
-    }
-
-    const version = req.body.version && req.body.version.trim() ? req.body.version.trim() : "v1.0.0";
-    const releaseNotes = req.body.releaseNotes ? req.body.releaseNotes.trim() : "";
-
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString("mr-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric"
-    }) + " " + now.toLocaleTimeString("mr-IN", { hour: "2-digit", minute: "2-digit" });
-
-    const newMeta = {
-      exists: true,
-      filename: req.file.filename,
-      version: version,
-      sizeBytes: req.file.size,
-      sizeFormatted: formatBytes(req.file.size),
-      uploadDate: formattedDate,
-      releaseNotes: releaseNotes,
-      downloadCount: currentMeta.filename === req.file.filename ? currentMeta.downloadCount : 0
-    };
-
-    saveMeta(newMeta);
-
-    res.json({
-      success: true,
-      message: "APK फाईल यशस्वीरीत्या अपलोड झाली!",
-      meta: newMeta
-    });
-  });
-});
-
-// 6. API: Delete APK (Protected by PIN)
-app.post("/api/delete-apk", (req, res) => {
-  const pin = req.headers["x-admin-pin"] || req.body.adminPin;
-  if (pin !== ADMIN_PIN) {
-    return res.status(401).json({ success: false, message: "अनधिकृत प्रवेश! चुकीचा पासवर्ड." });
-  }
-
-  const currentMeta = getMeta();
-  if (currentMeta.exists && currentMeta.filename) {
-    const filePath = path.join(DOWNLOADS_DIR, currentMeta.filename);
-    if (fs.existsSync(filePath)) {
-      try {
-        fs.unlinkSync(filePath);
-      } catch (err) {
-        console.error("Error deleting physical file:", err);
-      }
-    }
-  }
-
-  const emptyMeta = {
-    exists: false,
-    filename: "",
-    version: "",
-    sizeBytes: 0,
-    sizeFormatted: "",
-    uploadDate: "",
-    releaseNotes: "",
-    downloadCount: 0
-  };
-
-  saveMeta(emptyMeta);
-
-  res.json({
-    success: true,
-    message: "APK फाईल सर्व्हरवरून यशस्वीरीत्या डिलीट करण्यात आली!",
-    meta: emptyMeta
-  });
-});
-
-// 7. Instant APK Download Endpoint
+// Instant APK Download
 app.get("/api/download-apk", (req, res) => {
   const meta = getMeta();
-
   if (!meta.exists || !meta.filename) {
     return res.status(404).send(`
-      <!DOCTYPE html>
-      <html lang="mr">
-      <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>APK उपलब्ध नाही</title>
-      <style>
-        body{font-family:system-ui,sans-serif;text-align:center;padding:50px 16px;background:#f8fafc;color:#1e293b;}
-        .box{background:#fff;padding:32px 20px;border-radius:20px;max-width:440px;margin:0 auto;box-shadow:0 10px 30px rgba(0,0,0,0.08);}
-        h2{color:#dc2626;font-size:1.3rem;margin-bottom:10px;}
-        p{color:#64748b;font-size:0.95rem;line-height:1.5;margin-bottom:20px;}
-        a{display:inline-block;background:#059669;color:#fff;font-weight:bold;text-decoration:none;padding:12px 24px;border-radius:12px;}
-      </style>
-      </head>
-      <body>
-        <div class="box">
-          <h2>⚠️ APK अजून अपलोड केलेले नाही</h2>
-          <p>ॲडमिन लवकरच नवीन व्हर्जन अपलोड करतील. कृपया काही वेळाने पुन्हा प्रयत्न करा.</p>
-          <a href="/">मुख्य पानावर जा (Back to Home)</a>
-        </div>
-      </body>
-      </html>
+      <div style="font-family:sans-serif; text-align:center; padding:40px;">
+        <h2>APK फाईल उपलब्ध नाही</h2>
+        <p>कृपया ॲडमिन पॅनेल (<a href="/admin">/admin</a>) मध्ये जाऊन APK फाईल अपलोड करा.</p>
+      </div>
     `);
   }
-
   const filePath = path.join(DOWNLOADS_DIR, meta.filename);
   if (!fs.existsSync(filePath)) {
-    meta.exists = false;
-    saveMeta(meta);
-    return res.status(404).send("APK फाईल सापडली नाही.");
+    return res.status(404).send("APK फाईल सर्व्हरवर सापडली नाही.");
   }
-
-  // Count downloads
-  meta.downloadCount = (meta.downloadCount || 0) + 1;
-  saveMeta(meta);
-
-  // Directly start APK download
-  res.download(filePath, meta.filename, (err) => {
-    if (err && !res.headersSent) {
-      res.status(500).send("डाऊनलोड करताना त्रुटी आली.");
-    }
-  });
+  res.download(filePath, "maz-gaaav.apk");
 });
 
-// Legacy direct file request fallback
-app.get("/downloads/:filename", (req, res) => {
-  res.redirect("/api/download-apk");
+// Upload APK Route (Admin)
+app.post("/api/admin/upload-apk", uploadApk.single("apkFile"), (req, res) => {
+  const pin = req.body.adminPin;
+  if (pin !== ADMIN_PIN) {
+    if (req.file) try { fs.unlinkSync(req.file.path); } catch(e){}
+    return res.status(403).json({ success: false, message: "चुकीचा ॲडमिन पासवर्ड!" });
+  }
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: "कोणतीही APK फाईल निवडली नाही!" });
+  }
+
+  const meta = getMeta();
+  if (meta.filename && meta.filename !== req.file.filename) {
+    const oldPath = path.join(DOWNLOADS_DIR, meta.filename);
+    if (fs.existsSync(oldPath)) {
+      try { fs.unlinkSync(oldPath); } catch(e){}
+    }
+  }
+
+  const newMeta = {
+    exists: true,
+    filename: req.file.filename,
+    version: req.body.apkVersion || "v1.0.0",
+    size: req.file.size,
+    uploadDate: new Date().toISOString()
+  };
+  saveMeta(newMeta);
+
+  res.json({ success: true, message: "APK यशस्वीरित्या अपलोड झाले!", meta: newMeta });
+});
+
+// Upload Custom QR Route (Admin)
+app.post("/api/admin/upload-qr", uploadQr.single("qrImage"), (req, res) => {
+  const pin = req.body.adminPin;
+  if (pin !== ADMIN_PIN) {
+    if (req.file) try { fs.unlinkSync(req.file.path); } catch(e){}
+    return res.status(403).json({ success: false, message: "चुकीचा ॲडमिन पासवर्ड!" });
+  }
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: "कोणतीही इमेज निवडली नाही!" });
+  }
+
+  const meta = getMeta();
+  meta.hasCustomQr = true;
+  saveMeta(meta);
+
+  res.json({ success: true, message: "GPay QR कोड यशस्वीरित्या अपडेट झाला!" });
+});
+
+// Admin Panel UI
+app.get("/admin", (req, res) => {
+  const meta = getMeta();
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="mr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>maz Gaaav - ॲडमिन कंट्रोल पॅनेल</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card { background: #1e293b; border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid #334155; }
+        h1 { font-size: 1.5rem; color: #34d399; margin-top: 0; }
+        h2 { font-size: 1.2rem; margin-top: 0; color: #38bdf8; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        label { display: block; margin: 12px 0 6px; font-weight: 600; font-size: 0.9rem; }
+        input[type="text"], input[type="password"], input[type="file"] { width: 100%; box-sizing: border-box; padding: 12px; background: #0f172a; border: 1px solid #475569; border-radius: 8px; color: #fff; font-size: 0.95rem; }
+        button { width: 100%; background: #059669; color: #fff; border: none; padding: 13px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-top: 16px; }
+        button:hover { background: #047857; }
+        .alert { padding: 12px; border-radius: 8px; margin-bottom: 16px; display: none; }
+        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 99px; font-size: 0.8rem; font-weight: bold; }
+        .active { background: #065f46; color: #a7f3d0; }
+        .inactive { background: #7f1d1d; color: #fecaca; }
+        .preview-img { width: 140px; height: auto; border-radius: 10px; border: 2px solid #059669; display: block; margin: 10px 0; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>⚙️ maz Gaaav ॲडमिन पॅनेल</h1>
+        
+        <!-- APK Upload Card -->
+        <div class="card">
+          <h2>1. APK फाईल व्यवस्थापन</h2>
+          <p>सद्यस्थिती: 
+            ${meta.exists ? '<span class="status-badge active">✓ APK उपलब्ध आहे</span>' : '<span class="status-badge inactive">✗ APK अपलोड नाही</span>'}
+          </p>
+          ${meta.exists ? `<p style="font-size:0.85rem; color:#94a3b8;">फाईल: ${meta.filename} | साईज: ${formatBytes(meta.size)} | व्हर्जन: ${meta.version}</p>` : ''}
+          
+          <form id="apkForm">
+            <label>नवीन APK फाईल निवडा:</label>
+            <input type="file" name="apkFile" accept=".apk" required>
+            
+            <label>व्हर्जन (उदा. v1.0.0):</label>
+            <input type="text" name="apkVersion" value="${meta.version || 'v1.0.0'}">
+
+            <label>ॲडमिन पासवर्ड (PIN):</label>
+            <input type="password" name="adminPin" placeholder="पासवर्ड टाका" required>
+
+            <button type="submit" id="apkSubmitBtn">🚀 नवीन APK अपलोड करा</button>
+          </form>
+          <div id="apkMsg" class="alert"></div>
+        </div>
+
+        <!-- QR Code Upload Card -->
+        <div class="card">
+          <h2>2. स्वतःचा GPay QR कोड अपलोड करा</h2>
+          <p>सध्याचा QR कोड:</p>
+          <img src="/api/qr-image?t=${Date.now()}" alt="Current QR" class="preview-img" id="currentQrImg">
+
+          <form id="qrForm">
+            <label>तुमच्या GPay QR चा फोटो निवडा (.png / .jpg):</label>
+            <input type="file" name="qrImage" accept="image/*" required>
+
+            <label>ॲडमिन पासवर्ड (PIN):</label>
+            <input type="password" name="adminPin" placeholder="पासवर्ड टाका" required>
+
+            <button type="submit" style="background:#2563eb;" id="qrSubmitBtn">📸 नवीन GPay QR अपडेट करा</button>
+          </form>
+          <div id="qrMsg" class="alert"></div>
+        </div>
+
+        <p style="text-align:center;"><a href="/" style="color:#38bdf8; text-decoration:none;">⬅ मुख्य पानावर परत जा</a></p>
+      </div>
+
+      <script>
+        // APK Upload Handler
+        document.getElementById('apkForm').onsubmit = async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('apkSubmitBtn');
+          const msg = document.getElementById('apkMsg');
+          btn.disabled = true;
+          btn.innerText = "अपलोड होत आहे... कृपया थांबा";
+          msg.style.display = "none";
+
+          const formData = new FormData(e.target);
+          try {
+            const res = await fetch('/api/admin/upload-apk', { method: 'POST', body: formData });
+            const data = await res.json();
+            msg.style.display = "block";
+            if (data.success) {
+              msg.style.background = "#065f46";
+              msg.style.color = "#a7f3d0";
+              msg.innerText = data.message;
+              setTimeout(() => location.reload(), 1500);
+            } else {
+              msg.style.background = "#7f1d1d";
+              msg.style.color = "#fecaca";
+              msg.innerText = data.message;
+            }
+          } catch(err) {
+            msg.style.display = "block";
+            msg.style.background = "#7f1d1d";
+            msg.innerText = "सर्व्हर एरर!";
+          }
+          btn.disabled = false;
+          btn.innerText = "🚀 नवीन APK अपलोड करा";
+        };
+
+        // QR Upload Handler
+        document.getElementById('qrForm').onsubmit = async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('qrSubmitBtn');
+          const msg = document.getElementById('qrMsg');
+          btn.disabled = true;
+          btn.innerText = "QR अपडेट होत आहे...";
+          msg.style.display = "none";
+
+          const formData = new FormData(e.target);
+          try {
+            const res = await fetch('/api/admin/upload-qr', { method: 'POST', body: formData });
+            const data = await res.json();
+            msg.style.display = "block";
+            if (data.success) {
+              msg.style.background = "#065f46";
+              msg.style.color = "#a7f3d0";
+              msg.innerText = data.message;
+              document.getElementById('currentQrImg').src = '/api/qr-image?t=' + Date.now();
+            } else {
+              msg.style.background = "#7f1d1d";
+              msg.style.color = "#fecaca";
+              msg.innerText = data.message;
+            }
+          } catch(err) {
+            msg.style.display = "block";
+            msg.style.background = "#7f1d1d";
+            msg.innerText = "सर्व्हर एरर!";
+          }
+          btn.disabled = false;
+          btn.innerText = "📸 नवीन GPay QR अपडेट करा";
+        };
+      </script>
+    </body>
+    </html>
+  `);
 });
 
 app.listen(PORT, () => {
-  console.log("=".repeat(55));
-  console.log("  maz Gaaav Mahur-Kinwat Portal is LIVE!");
-  console.log(`  🌐 Public Website:       http://localhost:${PORT}`);
-  console.log(`  🔒 Private Admin Panel:   http://localhost:${PORT}/admin`);
-  console.log(`  💳 UPI Payment ID:       ${UPI_ID} (₹${APP_PRICE})`);
-  console.log(`  📲 Dynamic QR Code API:  http://localhost:${PORT}/api/qr-code`);
-  console.log("=".repeat(55));
+  console.log(`Server running on port ${PORT}`);
 });
