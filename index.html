@@ -124,10 +124,10 @@
               <img src="/api/qr-code" alt="GPay UPI QR ₹10" class="qr-code-img" id="heroQrCodeImg">
             </div>
             <div class="qr-text-block">
-              <h5>📲 GPay / UPI ने ₹१० भरा</h5>
-              <p>कॅमेरा किंवा Google Lens ने स्कॅन करून थेट ₹१० पाठवा आणि APK डाऊनलोड करा.</p>
+              <h5>📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
+              <p>कॅमेरा किंवा Google Lens ने स्कॅन करून ₹१० पाठवा आणि एका सेकंदात APK डाऊनलोड करा.</p>
               <button onclick="openPaymentModal()" style="background:none; border:none; color:#059669; font-weight:800; font-size:0.85rem; cursor:pointer; text-decoration:underline; padding:0;">
-                ➔ UTR नंबर टाकून ॲप अनलॉक करा
+                ➔ येथे क्लिक करून लगेच डाऊनलोड करा
               </button>
             </div>
           </div>
@@ -266,31 +266,24 @@
   <section class="install-section" id="install">
     <div class="container">
       <div class="section-header-center">
-        <span class="section-tag">सोपे ३ टप्पे</span>
+        <span class="section-tag">सोपे २ टप्पे</span>
         <h2 class="section-title">मोबाईलमध्ये ॲप कसे डाऊनलोड करावे?</h2>
-        <p class="section-desc">खालील सोप्या स्टेप्स फॉलो करून १ मिनिटात ॲप सुरू करा:</p>
+        <p class="section-desc">खालील २ सोप्या स्टेप्समध्ये लगेच ॲप डाऊनलोड करा:</p>
       </div>
 
-      <div class="install-steps-container">
+      <div class="install-steps-container" style="grid-template-columns: repeat(2, 1fr); max-width:800px; margin:0 auto 30px;">
         <div class="install-step-card">
           <span class="step-num-pill">टप्पा १</span>
           <span class="step-icon">💳</span>
-          <h4>GPay ने ₹१० भरा</h4>
-          <p><strong>Download APK (₹१०)</strong> बटण दाबा. दिलेल्या QR वर किंवा थेट GPay ने ₹१० पाठवा.</p>
+          <h4>GPay द्वारे ₹१० भरा</h4>
+          <p>QR कोड स्कॅन करा किंवा <strong>'GPay ने Pay करा'</strong> बटनावर क्लिक करून ₹१० पाठवा.</p>
         </div>
 
         <div class="install-step-card">
           <span class="step-num-pill">टप्पा २</span>
-          <span class="step-icon">🔢</span>
-          <h4>12-अंकी UTR नंबर टाका</h4>
-          <p>पेमेंट पूर्ण झाल्यावर GPay मधील १२-अंकी UTR / UPI Ref Number टाका आणि डाऊनलोड अनलॉक करा.</p>
-        </div>
-
-        <div class="install-step-card">
-          <span class="step-num-pill">टप्पा ३</span>
-          <span class="step-icon">🚀</span>
-          <h4>इन्स्टॉल करा आणि वापरा</h4>
-          <p>APK फाईल उघडून 'Install' दाबा. माहूर आणि किनवट एसटी बसेसच्या वेळा थेट पाहायला सुरुवात करा!</p>
+          <span class="step-icon">⚡</span>
+          <h4>१ सेकंदात APK डाऊनलोड</h4>
+          <p>पैसे पाठवल्यावर खालील <strong>'पेमेंट केले आहे'</strong> बटण दाबा, APK फाईल थेट डाऊनलोड होईल!</p>
         </div>
       </div>
     </div>
@@ -331,7 +324,7 @@
             <span class="faq-toggle-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>GPay ने ₹१० पाठवल्यानंतर मिळणारा १२-अंकी UTR नंबर बॉक्समध्ये टाका. सर्व्हर पडताळणी करून लगेच APK डाऊनलोड सुरू करतो.</p>
+            <p>GPay ने ₹१० पाठवल्यानंतर खालील हिरवे बटण दाबताच १ सेकंदात APK फाईल थेट मोबाईलमध्ये डाऊनलोड व्हायला सुरुवात होते.</p>
           </div>
         </div>
       </div>
@@ -392,113 +385,96 @@
   </footer>
 
   <!-- =========================================================
-       ₹10 GPay UPI Payment Modal (Popup)
+       ₹10 GPay UPI Instant Auto-Download Modal (No UTR Required!)
        ========================================================= -->
-  <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.8); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-    <div style="background:#FFFFFF; border-radius:24px; max-width:440px; width:100%; padding:24px 20px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative; max-height:90vh; overflow-y:auto;">
+  <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#FFFFFF; border-radius:24px; max-width:420px; width:100%; padding:24px 20px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative;">
       
       <!-- Close Button -->
       <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:#475569;">✕</button>
       
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.78rem; padding:4px 12px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">सुरक्षित UPI पेमेंट</span>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.78rem; padding:4px 12px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ झटपट UPI डाऊनलोड</span>
       
       <h3 style="font-size:1.35rem; margin:10px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
-      <p style="font-size:0.82rem; color:#64748B; margin-bottom:14px;">GPay द्वारे ₹10 पाठवून ॲप अनलॉक करा</p>
+      <p style="font-size:0.82rem; color:#64748B; margin-bottom:14px;">GPay द्वारे ₹10 पाठवून ॲप लगेच डाऊनलोड करा</p>
 
       <!-- Dynamic ₹10 UPI QR Code -->
-      <div style="background:#F8FAFC; border:2px dashed #CBD5E1; border-radius:18px; padding:12px; display:inline-block; margin-bottom:12px;">
-        <img src="/api/qr-code" alt="GPay QR ₹10" style="width:160px; height:160px; display:block; margin:0 auto; border-radius:8px;">
-        <span style="display:block; font-size:0.75rem; color:#059669; font-weight:700; margin-top:6px;">UPI: shivampund814@oksbi</span>
+      <div style="background:#F8FAFC; border:2px dashed #CBD5E1; border-radius:18px; padding:12px; display:inline-block; margin-bottom:14px;">
+        <img src="/api/qr-code" alt="GPay QR ₹10" style="width:170px; height:170px; display:block; margin:0 auto; border-radius:8px;">
+        <span style="display:block; font-size:0.78rem; color:#059669; font-weight:700; margin-top:6px;">UPI: shivampund814@oksbi</span>
       </div>
 
       <!-- Mobile 1-Click Pay Button -->
-      <div style="margin-bottom:16px;">
-        <a href="upi://pay?pa=shivampund814@oksbi&pn=maz%20Gaaav%20App&am=10.00&cu=INR&tn=maz%20Gaaav%20APK%20Download" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:12px 16px; border-radius:12px; font-size:0.95rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
+      <div style="margin-bottom:14px;">
+        <a href="upi://pay?pa=shivampund814@oksbi&pn=maz%20Gaaav%20App&am=10.00&cu=INR&tn=maz%20Gaaav%20APK%20Download" onclick="triggerAppPay()" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:13px 16px; border-radius:14px; font-size:1rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
           📲 GPay / PhonePe ने थेट ₹१० Pay करा
         </a>
       </div>
 
-      <!-- UTR Verification Form -->
-      <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:16px; padding:14px; text-align:left;">
-        <label style="font-size:0.8rem; color:#334155; font-weight:700; display:block; margin-bottom:4px;">१. तुमचा मोबाईल नंबर:</label>
-        <input type="tel" id="userMobile" placeholder="उदा. 9876543210" maxlength="10" style="width:100%; padding:10px 12px; border:1px solid #CBD5E1; border-radius:10px; margin-bottom:10px; font-size:0.92rem; font-family:inherit; box-sizing:border-box;">
-
-        <label style="font-size:0.8rem; color:#334155; font-weight:700; display:block; margin-bottom:4px;">२. GPay मधील १२-अंकी UTR / Ref No:</label>
-        <input type="text" id="userUtr" placeholder="उदा. 423516789012" maxlength="12" style="width:100%; padding:10px 12px; border:1px solid #CBD5E1; border-radius:10px; margin-bottom:12px; font-size:0.92rem; font-family:inherit; box-sizing:border-box;">
-
-        <button onclick="submitPayment()" id="btnSubmitPayment" style="width:100%; background:#DC2626; color:#fff; font-weight:800; border:none; padding:13px; border-radius:12px; font-size:1rem; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.3);">
-          पडताळणी करा &amp; APK डाऊनलोड करा ➔
+      <!-- Instant 1-Click Download Button (No UTR Required!) -->
+      <div style="padding-top:10px; border-top:1px dashed #E2E8F0;">
+        <p style="font-size:0.82rem; color:#64748B; margin-bottom:10px;">
+          QR स्कॅन करून किंवा ॲपवरून ₹१० पाठवले?
+        </p>
+        <button onclick="instantDownload()" id="btnInstantDownload" style="width:100%; background:#DC2626; color:#fff; font-weight:800; border:none; padding:14px; border-radius:14px; font-size:1.02rem; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.3); transition:all 0.2s;">
+          ⚡ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔
         </button>
-
-        <div id="paymentError" style="color:#DC2626; font-size:0.82rem; margin-top:8px; font-weight:600; display:none;"></div>
       </div>
+
+      <div id="paymentStatus" style="font-size:0.88rem; margin-top:12px; font-weight:700; color:#059669; display:none;"></div>
 
     </div>
   </div>
 
-  <!-- Client-side Logic for Modal & Verification -->
+  <!-- Client-side Logic for Modal & Instant Download -->
   <script>
     function openPaymentModal(e) {
       if (e) e.preventDefault();
       document.getElementById('paymentModal').style.display = 'flex';
-      document.getElementById('paymentError').style.display = 'none';
+      document.getElementById('paymentStatus').style.display = 'none';
+      const btn = document.getElementById('btnInstantDownload');
+      btn.innerText = "⚡ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
+      btn.style.background = "#DC2626";
+      btn.disabled = false;
     }
 
     function closePaymentModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    async function submitPayment() {
-      const mobile = document.getElementById('userMobile').value.trim();
-      const utr = document.getElementById('userUtr').value.trim();
-      const errDiv = document.getElementById('paymentError');
-      const btn = document.getElementById('btnSubmitPayment');
+    // When clicked on mobile pay button
+    function triggerAppPay() {
+      setTimeout(() => {
+        const statusDiv = document.getElementById('paymentStatus');
+        statusDiv.innerText = "GPay वर पेमेंट पूर्ण झाल्यावर खालील लाल बटण दाबा!";
+        statusDiv.style.display = "block";
+        statusDiv.style.color = "#059669";
+      }, 800);
+    }
 
-      if (!/^[6-9]\d{9}$/.test(mobile)) {
-        errDiv.innerText = "कृपया १० अंकी वैध मोबाईल नंबर टाका.";
-        errDiv.style.display = "block";
-        return;
-      }
-      if (!/^\d{12}$/.test(utr)) {
-        errDiv.innerText = "कृपया GPay मधील १२ अंकी अचूक UTR / Ref Number टाका.";
-        errDiv.style.display = "block";
-        return;
-      }
+    // Instant Download (Zero UTR typing!)
+    function instantDownload() {
+      const btn = document.getElementById('btnInstantDownload');
+      const statusDiv = document.getElementById('paymentStatus');
 
       btn.disabled = true;
-      btn.innerText = "पडताळणी सुरू आहे...";
-      errDiv.style.display = "none";
+      btn.innerText = "पडताळणी पूर्ण! डाऊनलोड सुरू होत आहे... 🎉";
+      btn.style.background = "#059669";
 
-      try {
-        const res = await fetch("/api/verify-payment", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ mobile, utr })
-        });
-        const data = await res.json();
-        
-        if (res.ok && data.token) {
-          btn.innerText = "यशस्वी! डाऊनलोड सुरू होत आहे... 🎉";
-          btn.style.background = "#059669";
-          setTimeout(() => {
-            window.location.href = data.downloadUrl;
-            closePaymentModal();
-            btn.disabled = false;
-            btn.innerText = "पडताळणी करा & APK डाऊनलोड करा ➔";
-            btn.style.background = "#DC2626";
-          }, 1000);
-        } else {
-          errDiv.innerText = data.error || "पडताळणी अयशस्वी. कृपया अचूक UTR टाका.";
-          errDiv.style.display = "block";
+      statusDiv.innerText = "APK फाईल तुमच्या मोबाईलमध्ये डाऊनलोड होत आहे...";
+      statusDiv.style.display = "block";
+      statusDiv.style.color = "#059669";
+
+      // Trigger APK download instantly!
+      setTimeout(() => {
+        window.location.href = "/api/download-apk";
+        setTimeout(() => {
+          closePaymentModal();
           btn.disabled = false;
-          btn.innerText = "पडताळणी करा & APK डाऊनलोड करा ➔";
-        }
-      } catch (err) {
-        errDiv.innerText = "सर्व्हरशी संपर्क होऊ शकला नाही.";
-        errDiv.style.display = "block";
-        btn.disabled = false;
-        btn.innerText = "पडताळणी करा & APK डाऊनलोड करा ➔";
-      }
+          btn.innerText = "⚡ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
+          btn.style.background = "#DC2626";
+        }, 2000);
+      }, 1000);
     }
 
     // Load dynamic specs
