@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>maz Gaaav - ॲडमिन पॅनल (Admin Portal)</title>
+  
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- 1. PIN Lock Screen (Shown if not logged in) -->
+  <div class="auth-wrapper" id="authGate">
+    <div class="auth-card">
+      <div class="auth-logo-badge">
+        <img src="assets/logo.svg" alt="maz Gaaav Logo" style="height: 44px;">
+      </div>
+      <h2>🔒 ॲडमिन लॉगिन (Admin Portal)</h2>
+      <p class="auth-sub">maz Gaaav ॲप अपलोड आणि व्यवस्थापित करण्यासाठी तुमचा पासवर्ड टाका.</p>
+      
+      <form id="pinForm" class="auth-form">
+        <div class="pin-input-wrap">
+          <input type="password" id="adminPinInput" placeholder="पासवर्ड टाका" maxlength="16" autocomplete="off" required>
+        </div>
+        <div class="error-msg" id="pinError"></div>
+        <button type="submit" class="btn-auth-submit" id="loginBtn">
+          <span>प्रवेश करा (Unlock) ➔</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Admin Dashboard (Shown after PIN unlock) -->
+  <div class="dashboard-wrapper" id="dashboard" style="display: none;">
+    
+    <!-- Top Bar -->
+    <header class="admin-header">
+      <div class="admin-header-container">
+        <div class="admin-brand">
+          <img src="assets/logo.svg" alt="maz Gaaav Logo" style="height: 38px;">
+          <span class="admin-badge">ॲडमिन कंट्रोल (Admin Control)</span>
+        </div>
+        <div class="admin-nav-actions">
+          <a href="/" target="_blank" class="btn-outline-link">
+            <span>🌐 मुख्य वेबसाईट (View Site)</span>
+          </a>
+          <button class="btn-logout" id="logoutBtn">लॉगआउट</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="admin-main container">
+      
+      <div class="admin-page-title">
+        <h1>APK व्यवस्थापन (माहूर &amp; किनवट)</h1>
+        <p>येथून तुम्ही युझर्ससाठी नवीन APK अपलोड करू शकता किंवा जुनी फाईल हटवू शकता.</p>
+      </div>
+
+      <!-- Live APK Status Card -->
+      <section class="admin-card current-apk-card" id="currentApkSection">
+        <div class="card-header-flex">
+          <div>
+            <span class="sub-label">सध्या सर्व्हरवर उपलब्ध असलेली फाईल</span>
+            <h3>सक्रिय APK स्थिती (Live APK Status)</h3>
+          </div>
+          <div id="liveStatusBadge">
+            <!-- Dynamic: Active or None -->
+          </div>
+        </div>
+
+        <!-- If APK exists -->
+        <div class="apk-details-grid" id="apkInfoBox" style="display: none;">
+          <div class="detail-box">
+            <span class="detail-title">📦 फाईलचे नाव</span>
+            <strong id="metaFilename">-</strong>
+          </div>
+          <div class="detail-box">
+            <span class="detail-title">🏷️ व्हर्जन</span>
+            <strong id="metaVersion" class="highlight-version">-</strong>
+          </div>
+          <div class="detail-box">
+            <span class="detail-title">📊 फाईल साईज</span>
+            <strong id="metaSize">-</strong>
+          </div>
+          <div class="detail-box">
+            <span class="detail-title">📅 अपलोड तारीख</span>
+            <strong id="metaUploadDate">-</strong>
+          </div>
+          <div class="detail-box full-width">
+            <span class="detail-title">👥 एकूण डाऊनलोड्स (Total Downloads)</span>
+            <strong id="metaDownloads" style="color: #059669; font-size: 1.3rem;">0</strong>
+          </div>
+          <div class="detail-box full-width" id="metaNotesWrap" style="display:none;">
+            <span class="detail-title">📝 अपडेट विषयी (Release Notes)</span>
+            <p id="metaNotes" style="font-size: 0.95rem; color: #475569; margin-top: 4px;"></p>
+          </div>
+
+          <!-- Action Buttons for Current APK -->
+          <div class="apk-actions-bar full-width">
+            <a href="/api/download-apk" class="btn-test-download" id="testDownloadBtn">
+              <span>⬇️ डाऊनलोड तपासून पहा (Test Download)</span>
+            </a>
+            <a href="/api/qr-code/download" class="btn-outline-link" style="padding: 12px 18px; border-radius: 10px;" id="downloadQrBtn">
+              <span>📲 डाऊनलोड QR पोस्टर सेव्ह करा</span>
+            </a>
+            <button class="btn-danger-delete" id="deleteApkBtn">
+              <span>🗑️ हा APK हटवा (Delete APK)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- If NO APK exists -->
+        <div class="no-apk-placeholder" id="noApkBox">
+          <div class="empty-icon">📁</div>
+          <h4>सध्या सर्व्हरवर कोणताही APK अपलोड केलेला नाही</h4>
+          <p>मुख्य वेबसाईटवरील डाऊनलोड बटण सध्या <em>"नवीन व्हर्जन लवकरच येत आहे"</em> असा मेसेज दाखवत आहे. खालील फॉर्मवरून नवीन APK अपलोड करा.</p>
+        </div>
+      </section>
+
+      <!-- Upload New APK Card -->
+      <section class="admin-card upload-section-card">
+        <div class="card-header-flex">
+          <div>
+            <span class="sub-label">नवीन रिलीज</span>
+            <h3>नवीन APK फाईल अपलोड करा (Upload New APK)</h3>
+          </div>
+        </div>
+
+        <form id="uploadForm" class="upload-form">
+          
+          <!-- Drag & Drop Zone -->
+          <div class="file-drop-zone" id="dropZone">
+            <input type="file" id="apkFileInput" name="apkFile" accept=".apk,application/vnd.android.package-archive" required>
+            <div class="drop-zone-content">
+              <span class="drop-icon">📤</span>
+              <h4>APK फाईल येथे ड्रॅग करा किंवा कॉम्प्युटरमधून निवडा</h4>
+              <p>केवळ <strong>.apk</strong> फाईल (Max: 300 MB)</p>
+              <div class="selected-file-pill" id="selectedFilePill" style="display:none;">
+                <span id="selectedFileName">-</span>
+                <span id="selectedFileSize">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Meta Inputs: Version & Notes -->
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="versionInput">व्हर्जन नाव (Version Tag) <span class="required">*</span></label>
+              <input type="text" id="versionInput" name="version" placeholder="उदा. v1.0.0 किंवा v1.0.2" value="v1.0.0" required>
+            </div>
+            <div class="form-group">
+              <label for="releaseNotesInput">बदल / वैशिष्ट्ये (Release Notes - ऐच्छिक)</label>
+              <input type="text" id="releaseNotesInput" name="releaseNotes" placeholder="उदा. माहूर व किनवट नवीन बसेसचे वेळापत्रक ॲड केले">
+            </div>
+          </div>
+
+          <!-- Upload Progress Bar -->
+          <div class="progress-wrap" id="progressWrap" style="display:none;">
+            <div class="progress-header">
+              <span id="progressStatusText">अपलोड होत आहे...</span>
+              <strong id="progressPercent">0%</strong>
+            </div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-submit-wrap">
+            <button type="submit" class="btn-primary-upload" id="submitUploadBtn">
+              <span>🚀 APK सर्व्हरवर सेव्ह करा (Upload &amp; Publish)</span>
+            </button>
+          </div>
+
+        </form>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="admin-toast" id="adminToast"></div>
+
+  <!-- Confirmation Modal for Delete -->
+  <div class="confirm-modal-overlay" id="confirmModal" style="display: none;">
+    <div class="confirm-modal-card">
+      <div class="modal-icon-danger">⚠️</div>
+      <h3>तुम्हाला खात्री आहे का?</h3>
+      <p>हा APK सर्व्हरवरून कायमचा डिलीट केला जाईल. त्यानंतर सामान्य युझर्सना वेबसाईटवर <em>"लवकरच येत आहे"</em> असा मेसेज दिसेल.</p>
+      <div class="modal-buttons-row">
+        <button class="btn-cancel-modal" id="cancelDeleteBtn">रद्द करा (Cancel)</button>
+        <button class="btn-confirm-delete" id="confirmDeleteActionBtn">होय, डिलीट करा (Yes, Delete)</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

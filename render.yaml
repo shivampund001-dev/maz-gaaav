@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: maz-gaaav
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: ADMIN_PIN
+        value: "0003"

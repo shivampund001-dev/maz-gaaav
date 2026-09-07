@@ -1,0 +1,668 @@
+/* =========================================================
+   maz Gaaav Admin Dashboard Stylesheet
+   ========================================================= */
+
+:root {
+  --admin-primary: #059669;
+  --admin-primary-dark: #047857;
+  --admin-primary-light: #10B981;
+  --admin-danger: #DC2626;
+  --admin-danger-dark: #B91C1C;
+  --admin-bg: #F8FAFC;
+  --admin-card: #FFFFFF;
+  --admin-text: #0F172A;
+  --admin-muted: #64748B;
+  --admin-border: #E2E8F0;
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Noto Sans Devanagari', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* =========================================================
+   PIN Lock Gate Screen
+   ========================================================= */
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 30%, rgba(5, 150, 105, 0.12) 0%, transparent 60%), #0F172A;
+}
+
+.auth-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 40px 36px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.auth-logo-badge {
+  margin-bottom: 20px;
+}
+
+.auth-card h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #0F172A;
+}
+
+.auth-sub {
+  font-size: 0.95rem;
+  color: var(--admin-muted);
+  margin-bottom: 24px;
+}
+
+.pin-input-wrap {
+  margin-bottom: 14px;
+}
+
+.pin-input-wrap input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid var(--admin-border);
+  font-size: 1.15rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.2em;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.pin-input-wrap input:focus {
+  border-color: var(--admin-primary);
+}
+
+.error-msg {
+  color: var(--admin-danger);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  min-height: 20px;
+}
+
+.btn-auth-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--admin-primary);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-auth-submit:hover {
+  background: var(--admin-primary-dark);
+}
+
+.auth-footer-hint {
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: #94A3B8;
+  border-top: 1px dashed var(--admin-border);
+  padding-top: 14px;
+}
+
+/* =========================================================
+   Admin Header Bar
+   ========================================================= */
+.admin-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--admin-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.admin-header-container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-badge {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.admin-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-outline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-outline-link:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+}
+
+.btn-logout {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background: #FEE2E2;
+}
+
+/* =========================================================
+   Admin Main Content
+   ========================================================= */
+.admin-main {
+  padding: 40px 24px 80px;
+}
+
+.admin-page-title {
+  margin-bottom: 30px;
+}
+
+.admin-page-title h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--admin-text);
+  margin-bottom: 6px;
+}
+
+.admin-page-title p {
+  color: var(--admin-muted);
+  font-size: 1rem;
+}
+
+/* Cards */
+.admin-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  margin-bottom: 30px;
+}
+
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.sub-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--admin-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.card-header-flex h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.badge-live {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #6EE7B7;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-offline {
+  background: #F1F5F9;
+  color: #64748B;
+  border: 1px solid #CBD5E1;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* APK Details Grid */
+.apk-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.detail-box {
+  background: #F8FAFC;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.detail-box.full-width {
+  grid-column: span 2;
+}
+
+.detail-title {
+  font-size: 0.8rem;
+  color: var(--admin-muted);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.detail-box strong {
+  font-size: 1.1rem;
+  color: var(--admin-text);
+  word-break: break-all;
+}
+
+.highlight-version {
+  color: #047857;
+  background: #D1FAE5;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* APK Actions Bar */
+.apk-actions-bar {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-test-download {
+  flex: 1;
+  background: #F0FDF4;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-test-download:hover {
+  background: #DCFCE7;
+  border-color: #6EE7B7;
+}
+
+.btn-danger-delete {
+  background: #FEF2F2;
+  color: var(--admin-danger);
+  border: 1px solid #FCA5A5;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-danger-delete:hover {
+  background: var(--admin-danger);
+  color: #FFFFFF;
+}
+
+/* No APK Placeholder */
+.no-apk-placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  background: #F8FAFC;
+  border: 2px dashed var(--admin-border);
+  border-radius: 16px;
+}
+
+.empty-icon {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+}
+
+.no-apk-placeholder h4 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.no-apk-placeholder p {
+  color: var(--admin-muted);
+  font-size: 0.95rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   Upload Form & Drop Zone
+   ========================================================= */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.file-drop-zone {
+  position: relative;
+  border: 2px dashed #94A3B8;
+  border-radius: 16px;
+  padding: 44px 20px;
+  text-align: center;
+  background: #FAFAFA;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.dragover {
+  border-color: var(--admin-primary);
+  background: #ECFDF5;
+}
+
+.file-drop-zone input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.drop-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.drop-zone-content h4 {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.drop-zone-content p {
+  font-size: 0.88rem;
+  color: var(--admin-muted);
+}
+
+.selected-file-pill {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #059669;
+  color: #FFFFFF;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.form-row-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.form-group .required {
+  color: var(--admin-danger);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  border-color: var(--admin-primary);
+}
+
+/* Progress Bar */
+.progress-wrap {
+  background: #F8FAFC;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 12px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10B981, #059669);
+  transition: width 0.15s ease;
+}
+
+/* Submit Button */
+.btn-primary-upload {
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+}
+
+.btn-primary-upload:hover {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  transform: translateY(-2px);
+}
+
+.btn-primary-upload:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   Toast & Modal
+   ========================================================= */
+.admin-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 16px 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-left: 4px solid var(--admin-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.admin-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.admin-toast.error {
+  border-left-color: var(--admin-danger);
+}
+
+.confirm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.confirm-modal-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-icon-danger {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.confirm-modal-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.confirm-modal-card p {
+  font-size: 0.92rem;
+  color: var(--admin-muted);
+  margin-bottom: 24px;
+}
+
+.modal-buttons-row {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-cancel-modal {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+  background: #FFFFFF;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-confirm-delete {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--admin-danger);
+  color: #FFFFFF;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-confirm-delete:hover {
+  background: var(--admin-danger-dark);
+}
+
+@media (max-width: 768px) {
+  .apk-details-grid,
+  .form-row-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-box.full-width {
+    grid-column: span 1;
+  }
+  .admin-header-container {
+    height: auto;
+    padding: 14px 20px;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
