@@ -29,7 +29,6 @@
   <header class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#" class="brand-link" aria-label="maz Gaaav Home">
-        <!-- Crisp Vector Logo -->
         <svg width="44" height="44" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px; flex-shrink:0;">
           <rect width="48" height="48" rx="12" fill="#059669"/>
           <rect x="10" y="12" width="28" height="23" rx="4" fill="#DC2626"/>
@@ -93,7 +92,6 @@
         <div class="cta-download-box">
           <div class="cta-button-group">
             <button onclick="openPaymentModal()" class="btn-primary-download" id="heroDownloadBtn">
-              <!-- Android Icon -->
               <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.414 13.8533 8.1 12 8.1s-3.5902.314-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.152 5676l1.9972 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3433-4.1021-2.689-7.5743-6.1185-9.4396"/>
               </svg>
@@ -103,7 +101,6 @@
                 <span class="btn-main-label">Download APK (₹१० Pay करा)</span>
               </div>
 
-              <!-- Arrow Icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left: auto;">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -121,11 +118,11 @@
           <!-- Official GPay QR Code Card on Main Page -->
           <div class="qr-download-card" style="padding:16px; align-items:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:18px; margin-top:20px; display:flex; gap:16px;">
             <div class="qr-image-wrapper" style="border:2px solid #059669; padding:4px; border-radius:16px; background:#fff; box-shadow:0 4px 14px rgba(5,150,105,0.15); flex-shrink:0;">
-              <img src="qr.png" onerror="this.src='/api/qr-code'" alt="Google Pay QR - Shivam Pund" style="width:125px; height:auto; display:block; border-radius:12px;" id="heroQrCodeImg">
+              <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:125px; height:auto; display:block; border-radius:12px;" id="heroQrCodeImg">
             </div>
             <div class="qr-text-block" style="padding-left:6px;">
               <h5 style="font-size:1.15rem; color:#0F172A; margin-bottom:6px; font-weight:800;">📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
-              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">हा अधिकृत QR स्कॅन करून ₹१० पाठवा आणि लगेच APK मिळवा (सर्व UPI ॲप्स चालतात).</p>
+              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">हा QR स्कॅन करा किंवा खालील बटण दाबून ₹१० पाठवून लगेच APK मिळवा.</p>
               <button onclick="openPaymentModal()" style="background:#059669; color:#fff; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
                 ➔ येथे क्लिक करून लगेच डाऊनलोड करा
               </button>
@@ -144,19 +141,15 @@
 
       <!-- Right Phone Mockup Column -->
       <div class="phone-mockup-wrap">
-        
         <div class="phone-screen-tabs" role="tablist">
           <button class="screen-tab-btn active" data-target="screen-live">⏱️ थेट आगमन</button>
           <button class="screen-tab-btn" data-target="screen-table">📅 वेळापत्रक</button>
           <button class="screen-tab-btn" data-target="screen-alert">🔔 अलर्ट्स</button>
         </div>
 
-        <!-- Realistic ST Live Mockup Screen -->
         <div class="phone-device-chassis">
           <div class="phone-camera-notch"></div>
           <div class="phone-screen-display" style="background:#0F172A; padding:24px 16px; color:#fff; display:flex; flex-direction:column; justify-content:space-between; min-height:420px;">
-            
-            <!-- App Header -->
             <div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
                 <div>
@@ -166,7 +159,6 @@
                 <span style="background:#DC2626; color:#fff; font-size:0.7rem; font-weight:800; padding:3px 8px; border-radius:99px;">🔴 LIVE ST</span>
               </div>
 
-              <!-- Live Bus Card -->
               <div style="background:#1E293B; border:1px solid #334155; border-radius:16px; padding:14px; margin-bottom:12px;">
                 <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:6px;">
                   <span style="color:#94A3B8;">गाडी क्र: <strong>MH-26-BE-4412</strong></span>
@@ -183,7 +175,6 @@
                 </div>
               </div>
 
-              <!-- Next Stops -->
               <div style="background:#1E293B; border-radius:12px; padding:12px; font-size:0.78rem;">
                 <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
                   <span>📍 पुढील थांबा: <strong>बोधडी (Bodhadi)</strong></span>
@@ -196,18 +187,15 @@
               </div>
             </div>
 
-            <!-- Bottom Button in Mockup -->
             <button onclick="openPaymentModal()" style="width:100%; background:#059669; color:#fff; border:none; padding:12px; border-radius:12px; font-weight:800; font-size:0.85rem; cursor:pointer; margin-top:14px;">
               📲 ॲप डाऊनलोड करा (₹१०)
             </button>
-
           </div>
         </div>
 
         <p style="font-size: 0.85rem; color: #64748B; margin-top: 14px; text-align: center;">
           👆 माहूर व किनवट प्रवाशांसाठी थेट लाईव्ह बस ट्रॅकर
         </p>
-
       </div>
 
     </div>
@@ -276,7 +264,7 @@
           <span class="step-num-pill">टप्पा १</span>
           <span class="step-icon">💳</span>
           <h4>GPay द्वारे ₹१० भरा</h4>
-          <p>मोठा QR कोड स्कॅन करा किंवा <strong>'UPI ID कॉपी करा'</strong> वरून ₹१० पाठवा.</p>
+          <p>मोठा QR कोड स्कॅन करा किंवा <strong>'GPay ॲप उघडा' / 'UPI ID कॉपी'</strong> द्वारे ₹१० पाठवा.</p>
         </div>
 
         <div class="install-step-card">
@@ -385,7 +373,7 @@
   </footer>
 
   <!-- =========================================================
-       ₹10 Instant Download Modal (100% Working on Mobile & Desktop)
+       ₹10 Instant Download Modal with 2 Mobile Options & QR
        ========================================================= -->
   <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
     <div style="background:#FFFFFF; border-radius:26px; max-width:440px; width:100%; padding:22px 18px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); position:relative; max-height:92vh; overflow-y:auto;">
@@ -393,37 +381,41 @@
       <!-- Close Button -->
       <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:36px; height:36px; border-radius:50%; font-size:1.2rem; cursor:pointer; color:#475569; display:flex; align-items:center; justify-content:center;">✕</button>
       
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ झटपट UPI डाऊनलोड</span>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ थेट डाऊनलोड</span>
       
       <h3 style="font-size:1.3rem; margin:8px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
-      <p style="font-size:0.82rem; color:#64748B; margin-bottom:12px;">कोणत्याही UPI ॲपने ₹१० पाठवून लगेच ॲप मिळवा</p>
+      <p style="font-size:0.82rem; color:#64748B; margin-bottom:12px;">₹१० पाठवून लगेच ॲप डाऊनलोड करा</p>
 
-      <!-- OFFICIAL GOOGLE PAY QR CARD -->
+      <!-- OFFICIAL GPAY QR CODE CARD -->
       <div style="background:#F8FAFC; border:2px solid #059669; border-radius:18px; padding:8px; display:inline-block; margin-bottom:12px; box-shadow:0 8px 20px rgba(5,150,105,0.12); max-width:230px; width:100%;">
-        <img src="qr.png" onerror="this.src='/api/qr-code'" alt="Google Pay QR - Shivam Pund" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:12px;">
+        <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:12px;" id="modalQrImg">
         <div style="margin-top:5px;">
           <span style="font-size:0.88rem; color:#059669; font-weight:900; display:block;">रक्कम: ₹१० • shivampund814@oksbi</span>
         </div>
       </div>
 
-      <!-- 100% WORKING SOLUTION: Copy UPI ID Button for Mobile -->
-      <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:14px; padding:10px; margin-bottom:12px; text-align:center;">
-        <span style="font-size:0.8rem; color:#1E40AF; font-weight:700; display:block; margin-bottom:6px;">
-          📱 मोबाईलवरून एररशिवाय पेमेंट करण्यासाठी:
+      <!-- TWO MOBILE PAYMENT OPTIONS -->
+      <div style="text-align:left; margin-bottom:12px;">
+        <span style="font-size:0.8rem; font-weight:800; color:#1E293B; display:block; margin-bottom:8px; text-align:center;">
+          👇 मोबाईलवरून पेमेंट करण्याचे २ सोपे मार्ग:
         </span>
-        <button onclick="copyUpiId()" id="btnCopyUpi" style="width:100%; background:#2563EB; color:#ffffff; border:none; padding:11px 14px; border-radius:10px; font-weight:800; font-size:0.92rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 12px rgba(37,99,235,0.25);">
-          <span>📋</span> <span id="copyBtnText">UPI ID कॉपी करा (shivampund814@oksbi)</span>
-        </button>
-        <span style="font-size:0.72rem; color:#64748B; display:block; margin-top:5px;">
-          (कॉपी करून तुमच्या GPay / PhonePe मध्ये पेस्ट करा आणि ₹10 पाठवा)
-        </span>
-      </div>
 
-      <!-- Mobile 1-Tap Open UPI App (Without forced amount that causes bank errors) -->
-      <div style="margin-bottom:12px;">
-        <a href="upi://pay?pa=shivampund814@oksbi&pn=Shivam%20Pund" onclick="triggerAppPay()" style="display:block; background:#059669; color:#FFFFFF; font-weight:800; padding:12px 14px; border-radius:12px; font-size:0.95rem; text-decoration:none; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
-          ⚡ थेट GPay / PhonePe ॲप उघडा
-        </a>
+        <!-- OPTION 1: Direct App Redirect -->
+        <div style="margin-bottom:8px;">
+          <a href="upi://pay?pa=shivampund814@oksbi&pn=Shivam%20Pund" onclick="triggerAppPay()" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:12px 14px; border-radius:12px; font-size:0.95rem; text-decoration:none; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
+            <span>⚡ पर्याय १:</span> <span>थेट GPay / PhonePe ॲप उघडा</span>
+          </a>
+        </div>
+
+        <!-- OPTION 2: Copy UPI ID (Zero Error) -->
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:10px;">
+          <button onclick="copyUpiId()" id="btnCopyUpi" style="width:100%; background:#2563EB; color:#ffffff; border:none; padding:11px 12px; border-radius:10px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(37,99,235,0.2);">
+            <span>📋 पर्याय २:</span> <span id="copyBtnText">UPI ID कॉपी करा (shivampund814@oksbi)</span>
+          </button>
+          <span style="font-size:0.72rem; color:#64748B; display:block; text-align:center; margin-top:5px;">
+            (कॉपी करून तुमच्या GPay मध्ये पेस्ट करा आणि ₹10 पाठवा)
+          </span>
+        </div>
       </div>
 
       <!-- Instant 1-Click Download Button (No UTR Required!) -->
