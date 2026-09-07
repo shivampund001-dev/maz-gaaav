@@ -955,3 +955,41 @@ a {
     width: 280px;
   }
 }
+
+
+/* --- Mobile Overflow Fix --- */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, p, span {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+  h1, .hero-title {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+  }
+  .hero-subtitle, p {
+    font-size: 0.95rem !important;
+    line-height: 1.4 !important;
+  }
+  .container, .hero, .hero-content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .phone-frame {
+    max-width: 280px !important;
+    margin: 20px auto !important;
+    overflow: hidden !important;
+  }
+}
