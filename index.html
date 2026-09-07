@@ -118,15 +118,15 @@
             <span class="apk-spec-item">🔒 <strong>100% सुरक्षित</strong></span>
           </div>
 
-          <!-- QR Code Download Box -->
-          <div class="qr-download-card">
-            <div class="qr-image-wrapper">
-              <img src="/api/qr-code" alt="GPay UPI QR ₹10" class="qr-code-img" id="heroQrCodeImg">
+          <!-- Large HD QR Code Download Box on Main Page -->
+          <div class="qr-download-card" style="padding:18px; align-items:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:18px;">
+            <div class="qr-image-wrapper" style="border:2px solid #059669; padding:8px; border-radius:16px; background:#fff; box-shadow:0 4px 14px rgba(5,150,105,0.15); flex-shrink:0;">
+              <img src="/api/qr-code" alt="GPay UPI QR ₹10" style="width:140px; height:140px; display:block; border-radius:8px;" id="heroQrCodeImg">
             </div>
-            <div class="qr-text-block">
-              <h5>📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
-              <p>कॅमेरा किंवा Google Lens ने स्कॅन करून ₹१० पाठवा आणि एका सेकंदात APK डाऊनलोड करा.</p>
-              <button onclick="openPaymentModal()" style="background:none; border:none; color:#059669; font-weight:800; font-size:0.85rem; cursor:pointer; text-decoration:underline; padding:0;">
+            <div class="qr-text-block" style="padding-left:6px;">
+              <h5 style="font-size:1.15rem; color:#0F172A; margin-bottom:6px; font-weight:800;">📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
+              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">कॅमेरा किंवा Google Lens ने हा मोठा QR स्कॅन करून ₹१० पाठवा आणि लगेच APK मिळवा.</p>
+              <button onclick="openPaymentModal()" style="background:#059669; color:#fff; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
                 ➔ येथे क्लिक करून लगेच डाऊनलोड करा
               </button>
             </div>
@@ -276,7 +276,7 @@
           <span class="step-num-pill">टप्पा १</span>
           <span class="step-icon">💳</span>
           <h4>GPay द्वारे ₹१० भरा</h4>
-          <p>QR कोड स्कॅन करा किंवा <strong>'GPay ने Pay करा'</strong> बटनावर क्लिक करून ₹१० पाठवा.</p>
+          <p>मोठा QR कोड स्कॅन करा किंवा <strong>'GPay ने Pay करा'</strong> बटनावर क्लिक करून ₹१० पाठवा.</p>
         </div>
 
         <div class="install-step-card">
@@ -385,43 +385,46 @@
   </footer>
 
   <!-- =========================================================
-       ₹10 GPay UPI Instant Auto-Download Modal (No UTR Required!)
+       ₹10 GPay UPI Instant Auto-Download Modal (Big HD 240px QR!)
        ========================================================= -->
   <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-    <div style="background:#FFFFFF; border-radius:24px; max-width:420px; width:100%; padding:24px 20px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.3); position:relative;">
+    <div style="background:#FFFFFF; border-radius:26px; max-width:440px; width:100%; padding:26px 20px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); position:relative; max-height:92vh; overflow-y:auto;">
       
       <!-- Close Button -->
-      <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; color:#475569;">✕</button>
+      <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:36px; height:36px; border-radius:50%; font-size:1.2rem; cursor:pointer; color:#475569; display:flex; align-items:center; justify-content:center;">✕</button>
       
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.78rem; padding:4px 12px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ झटपट UPI डाऊनलोड</span>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:5px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ झटपट UPI डाऊनलोड</span>
       
-      <h3 style="font-size:1.35rem; margin:10px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
-      <p style="font-size:0.82rem; color:#64748B; margin-bottom:14px;">GPay द्वारे ₹10 पाठवून ॲप लगेच डाऊनलोड करा</p>
+      <h3 style="font-size:1.4rem; margin:12px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
+      <p style="font-size:0.84rem; color:#64748B; margin-bottom:16px;">GPay द्वारे ₹10 पाठवून ॲप लगेच डाऊनलोड करा</p>
 
-      <!-- Dynamic ₹10 UPI QR Code -->
-      <div style="background:#F8FAFC; border:2px dashed #CBD5E1; border-radius:18px; padding:12px; display:inline-block; margin-bottom:14px;">
-        <img src="/api/qr-code" alt="GPay QR ₹10" style="width:170px; height:170px; display:block; margin:0 auto; border-radius:8px;">
-        <span style="display:block; font-size:0.78rem; color:#059669; font-weight:700; margin-top:6px;">UPI: shivampund814@oksbi</span>
+      <!-- BIG SIZE 240px HD QR Code -->
+      <div style="background:#FFFFFF; border:3px solid #059669; border-radius:22px; padding:16px; display:inline-block; margin-bottom:16px; box-shadow:0 10px 30px rgba(5,150,105,0.18);">
+        <img src="/api/qr-code" alt="GPay QR ₹10" style="width:240px; height:240px; max-width:72vw; display:block; margin:0 auto; border-radius:12px;">
+        <div style="margin-top:10px;">
+          <span style="font-size:0.95rem; color:#059669; font-weight:900; display:block;">रक्कम: ₹१० • UPI: shivampund814@oksbi</span>
+          <span style="font-size:0.75rem; color:#64748B; display:block; margin-top:3px;">(GPay • PhonePe • Paytm • BHIM सर्व चालते)</span>
+        </div>
       </div>
 
       <!-- Mobile 1-Click Pay Button -->
       <div style="margin-bottom:14px;">
-        <a href="upi://pay?pa=shivampund814@oksbi&pn=maz%20Gaaav%20App&am=10.00&cu=INR&tn=maz%20Gaaav%20APK%20Download" onclick="triggerAppPay()" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:13px 16px; border-radius:14px; font-size:1rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
+        <a href="upi://pay?pa=shivampund814@oksbi&pn=maz%20Gaaav%20App&am=10.00&cu=INR&tn=maz%20Gaaav%20APK%20Download" onclick="triggerAppPay()" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:14px 16px; border-radius:14px; font-size:1.02rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
           📲 GPay / PhonePe ने थेट ₹१० Pay करा
         </a>
       </div>
 
       <!-- Instant 1-Click Download Button (No UTR Required!) -->
-      <div style="padding-top:10px; border-top:1px dashed #E2E8F0;">
-        <p style="font-size:0.82rem; color:#64748B; margin-bottom:10px;">
+      <div style="padding-top:12px; border-top:1px dashed #E2E8F0;">
+        <p style="font-size:0.84rem; color:#475569; margin-bottom:10px; font-weight:600;">
           QR स्कॅन करून किंवा ॲपवरून ₹१० पाठवले?
         </p>
-        <button onclick="instantDownload()" id="btnInstantDownload" style="width:100%; background:#DC2626; color:#fff; font-weight:800; border:none; padding:14px; border-radius:14px; font-size:1.02rem; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.3); transition:all 0.2s;">
+        <button onclick="instantDownload()" id="btnInstantDownload" style="width:100%; background:#DC2626; color:#fff; font-weight:800; border:none; padding:14px; border-radius:14px; font-size:1.05rem; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.3); transition:all 0.2s;">
           ⚡ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔
         </button>
       </div>
 
-      <div id="paymentStatus" style="font-size:0.88rem; margin-top:12px; font-weight:700; color:#059669; display:none;"></div>
+      <div id="paymentStatus" style="font-size:0.9rem; margin-top:12px; font-weight:700; color:#059669; display:none;"></div>
 
     </div>
   </div>
