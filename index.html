@@ -119,7 +119,7 @@
           </div>
 
           <!-- Large HD QR Code Download Box on Main Page -->
-          <div class="qr-download-card" style="padding:18px; align-items:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:18px;">
+          <div class="qr-download-card" style="padding:18px; align-items:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:18px; margin-top:20px; display:flex; gap:16px;">
             <div class="qr-image-wrapper" style="border:2px solid #059669; padding:8px; border-radius:16px; background:#fff; box-shadow:0 4px 14px rgba(5,150,105,0.15); flex-shrink:0;">
               <img src="/api/qr-code" alt="GPay UPI QR ₹10" style="width:140px; height:140px; display:block; border-radius:8px;" id="heroQrCodeImg">
             </div>
@@ -135,7 +135,7 @@
         </div>
 
         <!-- Social Proof Trust Badges -->
-        <div class="trust-badges-row">
+        <div class="trust-badges-row" style="margin-top:24px;">
           <span>👥 <strong>५,०००+</strong> स्थानिक प्रवासी व भाविक</span>
           <span>⚡ <strong>थेट सर्व्हरवरून</strong> जलद डाऊनलोड</span>
           <span>📶 <strong>ऑफलाईन</strong> मोड सपोर्ट</span>
@@ -154,7 +154,7 @@
         <!-- Realistic ST Live Mockup Screen -->
         <div class="phone-device-chassis">
           <div class="phone-camera-notch"></div>
-          <div class="phone-screen-display" style="background:#0F172A; padding:24px 16px; color:#fff; display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="phone-screen-display" style="background:#0F172A; padding:24px 16px; color:#fff; display:flex; flex-direction:column; justify-content:space-between; min-height:420px;">
             
             <!-- App Header -->
             <div>
@@ -197,14 +197,14 @@
             </div>
 
             <!-- Bottom Button in Mockup -->
-            <button onclick="openPaymentModal()" style="width:100%; background:#059669; color:#fff; border:none; padding:12px; border-radius:12px; font-weight:800; font-size:0.85rem; cursor:pointer;">
+            <button onclick="openPaymentModal()" style="width:100%; background:#059669; color:#fff; border:none; padding:12px; border-radius:12px; font-weight:800; font-size:0.85rem; cursor:pointer; margin-top:14px;">
               📲 ॲप डाऊनलोड करा (₹१०)
             </button>
 
           </div>
         </div>
 
-        <p style="font-size: 0.85rem; color: var(--text-subtle); margin-top: 14px; text-align: center;">
+        <p style="font-size: 0.85rem; color: #64748B; margin-top: 14px; text-align: center;">
           👆 माहूर व किनवट प्रवाशांसाठी थेट लाईव्ह बस ट्रॅकर
         </p>
 
@@ -407,9 +407,9 @@
         </div>
       </div>
 
-      <!-- Mobile 1-Click Pay Button -->
+      <!-- Mobile 1-Click Pay Button (Clean UPI intent for all apps) -->
       <div style="margin-bottom:14px;">
-        <a href="upi://pay?pa=shivampund814@oksbi&pn=maz%20Gaaav%20App&am=10.00&cu=INR&tn=maz%20Gaaav%20APK%20Download" onclick="triggerAppPay()" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:14px 16px; border-radius:14px; font-size:1.02rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
+        <a href="upi://pay?pa=shivampund814@oksbi&pn=Shivam&am=10&cu=INR" onclick="triggerAppPay()" style="display:block; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:14px 16px; border-radius:14px; font-size:1.02rem; text-decoration:none; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
           📲 GPay / PhonePe ने थेट ₹१० Pay करा
         </a>
       </div>
@@ -449,7 +449,7 @@
     function triggerAppPay() {
       setTimeout(() => {
         const statusDiv = document.getElementById('paymentStatus');
-        statusDiv.innerText = "GPay वर पेमेंट पूर्ण झाल्यावर खालील लाल बटण दाबा!";
+        statusDiv.innerText = "पेमेंट पूर्ण झाल्यावर खालील लाल बटण दाबा!";
         statusDiv.style.display = "block";
         statusDiv.style.color = "#059669";
       }, 800);
@@ -476,7 +476,7 @@
           btn.disabled = false;
           btn.innerText = "⚡ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
           btn.style.background = "#DC2626";
-        }, 2000);
+        }, 2500);
       }, 1000);
     }
 
