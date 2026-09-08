@@ -22,7 +22,7 @@ const ROOT_APK_FILE = path.join(__dirname, "maz-gaaav.apk");
 const PAYMENTS_FILE = path.join(DOWNLOADS_DIR, "payments.json");
 const GATEWAY_FILE = path.join(DOWNLOADS_DIR, "gateway-config.json");
 
-// In-memory valid download tokens (15-minute expiry)
+// 15-Minute Valid Single-Use Download Tokens
 const validDownloadTokens = new Map();
 
 if (!fs.existsSync(DOWNLOADS_DIR)) {
@@ -147,12 +147,12 @@ app.get("/api/apk-info", (req, res) => {
 app.post("/api/create-order", (req, res) => {
   const gw = getGatewayConfig();
   if (!gw.enabled || !gw.keyId || !gw.keySecret) {
-    return res.json({ autoGateway: false, message: "Manual UPI active" });
+    return res.json({ autoGateway: false, message: "Gateway not configured" });
   }
 
   const authHeader = "Basic " + Buffer.from(gw.keyId + ":" + gw.keySecret).toString("base64");
   const postData = JSON.stringify({
-    amount: APP_PRICE * 100,
+    amount: APP_PRICE * 100, // ₹10 = 1000 paise
     currency: "INR",
     receipt: "rcpt_" + Date.now(),
     notes: { app: "maz Gaaav APK" }
@@ -192,78 +192,52 @@ app.post("/api/create-order", (req, res) => {
   razorReq.end();
 });
 
-// Razorpay Signature Verification
+// ========================================================
+// 2. CRYPTOGRAPHIC HMAC-SHA256 SIGNATURE VERIFICATION
+// ========================================================
 app.post("/api/verify-razorpay", (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, mobile } = req.body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
   const gw = getGatewayConfig();
 
   if (!gw.keySecret) {
     return res.status(500).json({ success: false, message: "Gateway not configured" });
   }
 
+  // Calculate HMAC-SHA256 hash
   const expectedSignature = crypto
     .createHmac("sha256", gw.keySecret)
     .update(razorpay_order_id + "|" + razorpay_payment_id)
     .digest("hex");
 
+  // STRICT CHECK: Signature MUST match 100%
   if (expectedSignature !== razorpay_signature) {
-    return res.status(400).json({ success: false, message: "पेमेंट पडताळणी अयशस्वी!" });
+    return res.status(400).json({ success: false, message: "पेमेंट पडताळणी अयशस्वी! बनावट पेमेंट नाकारले." });
   }
 
+  // Payment is 100% VERIFIED by Bank & Razorpay! Generate one-time secure token
   const token = crypto.randomBytes(16).toString("hex");
   const expiresAt = Date.now() + 15 * 60 * 1000;
-  validDownloadTokens.set(token, { paymentId: razorpay_payment_id, mobile: mobile || "N/A", expiresAt });
+  validDownloadTokens.set(token, { paymentId: razorpay_payment_id, expiresAt });
 
   savePayment({
     id: `PAY-${Date.now()}`,
-    mobile: mobile || "Razorpay GPay User",
+    mobile: "Verified User",
     reference: razorpay_payment_id,
     amount: APP_PRICE,
-    type: "Razorpay 1-Click",
+    type: "Razorpay 1-Click (GPay)",
     date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
     downloaded: false
   });
 
   res.json({
     success: true,
-    message: "पेमेंट १००% यशस्वी! डाऊनलोड सुरू होत आहे...",
+    message: "पेमेंट १००% यशस्वी! ॲप डाऊनलोड सुरू होत आहे...",
     downloadUrl: `/api/download-apk?token=${token}`
   });
 });
 
 // ========================================================
-// 2. NO-UTR INSTANT VERIFICATION (USING MOBILE NUMBER ONLY!)
-// ========================================================
-app.post("/api/verify-mobile-payment", (req, res) => {
-  const { mobile } = req.body;
-
-  if (!mobile || !/^[6-9]\d{9}$/.test(mobile.trim())) {
-    return res.status(400).json({ success: false, message: "कृपया अचूक १० अंकी मोबाईल नंबर टाका!" });
-  }
-
-  const token = crypto.randomBytes(16).toString("hex");
-  const expiresAt = Date.now() + 15 * 60 * 1000;
-  validDownloadTokens.set(token, { paymentId: "MOB-" + mobile.trim(), mobile: mobile.trim(), expiresAt });
-
-  savePayment({
-    id: `PAY-${Date.now()}`,
-    mobile: mobile.trim(),
-    reference: `UPI-Pay-${Date.now().toString().slice(-6)}`,
-    amount: APP_PRICE,
-    type: "GPay QR / UPI",
-    date: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-    downloaded: false
-  });
-
-  res.json({
-    success: true,
-    message: "नोंद झाली आहे! APK डाऊनलोड सुरू होत आहे...",
-    downloadUrl: `/api/download-apk?token=${token}`
-  });
-});
-
-// ========================================================
-// 3. SECURE TOKEN-PROTECTED DOWNLOAD
+// 3. SECURE TOKEN-PROTECTED DOWNLOAD (NO TOKEN = NO DOWNLOAD)
 // ========================================================
 app.get("/api/download-apk", (req, res) => {
   const token = req.query.token;
@@ -272,7 +246,7 @@ app.get("/api/download-apk", (req, res) => {
     return res.status(403).send(`
       <div style="font-family:sans-serif; text-align:center; padding:40px; line-height:1.6;">
         <h2 style="color:#dc2626;">⛔ डाऊनलोड लॉक आहे!</h2>
-        <p>आधी ₹१० चे पेमेंट करून मोबाईल नंबर टाकणे आवश्यक आहे.</p>
+        <p>आधी ₹१० चे पेमेंट पूर्ण करणे आवश्यक आहे.</p>
         <p><a href="/" style="background:#059669; color:#fff; padding:10px 20px; text-decoration:none; border-radius:8px; font-weight:bold;">मुख्य पानावर जा</a></p>
       </div>
     `);
@@ -281,7 +255,7 @@ app.get("/api/download-apk", (req, res) => {
   const tokenData = validDownloadTokens.get(token);
   if (Date.now() > tokenData.expiresAt) {
     validDownloadTokens.delete(token);
-    return res.status(403).send("डाऊनलोड लिंकची मुदत संपली आहे (15 मिनिटे). कृपया पुन्हा प्रयत्न करा.");
+    return res.status(403).send("डाऊनलोड लिंकची मुदत संपली आहे. कृपया पुन्हा प्रयत्न करा.");
   }
 
   const meta = getMeta();
@@ -298,8 +272,9 @@ app.get("/api/download-apk", (req, res) => {
     return res.status(404).send("APK फाईल उपलब्ध नाही. ॲडमिनशी संपर्क करा.");
   }
 
+  // Mark downloaded
   const payments = getPayments();
-  const payment = payments.find(p => p.mobile === tokenData.mobile);
+  const payment = payments.find(p => p.reference === tokenData.paymentId);
   if (payment) {
     payment.downloaded = true;
     fs.writeFileSync(PAYMENTS_FILE, JSON.stringify(payments, null, 2), "utf8");
@@ -308,7 +283,7 @@ app.get("/api/download-apk", (req, res) => {
   res.download(finalFile, "maz-gaaav.apk");
 });
 
-// Admin routes
+// Admin API routes
 app.post("/api/admin/upload-apk", uploadApk.single("apkFile"), (req, res) => {
   if (req.body.adminPin !== ADMIN_PIN) return res.status(403).json({ success: false, message: "चुकीचा पासवर्ड!" });
   if (!req.file) return res.status(400).json({ success: false, message: "फाईल निवडली नाही!" });
@@ -331,7 +306,7 @@ app.post("/api/admin/update-gateway", (req, res) => {
   const enabled = req.body.enabled === "true" || req.body.enabled === true;
 
   saveGatewayConfig({ keyId, keySecret, enabled: enabled && !!keyId && !!keySecret });
-  res.json({ success: true, message: "✅ Razorpay की सेव्ह झाल्या!", isActive: enabled && !!keyId && !!keySecret });
+  res.json({ success: true, message: "✅ Razorpay की यशस्वीरित्या सेव्ह झाल्या!", isActive: enabled && !!keyId && !!keySecret });
 });
 
 // Admin Panel UI
@@ -345,8 +320,8 @@ app.get("/admin", (req, res) => {
     <tr>
       <td style="padding:10px; border-bottom:1px solid #334155;">${idx + 1}</td>
       <td style="padding:10px; border-bottom:1px solid #334155; font-size:0.85rem;">${p.date}</td>
-      <td style="padding:10px; border-bottom:1px solid #334155; font-weight:bold; color:#38bdf8;">${p.mobile}</td>
-      <td style="padding:10px; border-bottom:1px solid #334155; font-size:0.8rem; color:#a7f3d0;">${p.type || "GPay"}</td>
+      <td style="padding:10px; border-bottom:1px solid #334155; font-family:monospace; color:#facc15;">${p.reference}</td>
+      <td style="padding:10px; border-bottom:1px solid #334155; font-size:0.8rem; color:#a7f3d0;">${p.type}</td>
       <td style="padding:10px; border-bottom:1px solid #334155; color:#34d399; font-weight:bold;">₹${p.amount}</td>
       <td style="padding:10px; border-bottom:1px solid #334155;">${p.downloaded ? '<span style="color:#34d399;">✓ डाऊनलोड झाले</span>' : '<span style="color:#facc15;">प्रलंबित</span>'}</td>
     </tr>
@@ -390,14 +365,14 @@ app.get("/admin", (req, res) => {
             <h3 style="font-size:1.8rem; margin:6px 0 0; color:#34d399;">₹${totalEarnings}</h3>
           </div>
           <div class="card" style="margin-bottom:0; text-align:center; padding:18px;">
-            <span style="font-size:0.85rem; color:#94a3b8;">Razorpay स्थिती</span>
+            <span style="font-size:0.85rem; color:#94a3b8;">Razorpay 1-क्लिक स्थिती</span>
             <h3 style="font-size:1.2rem; margin:8px 0 0; color:${gw.enabled ? '#34d399' : '#facc15'};" id="gwStatusBadge">
-              ${gw.enabled ? '✓ सक्रीय (Active)' : 'Manual Mode'}
+              ${gw.enabled ? '✓ चालू (Active)' : 'की सेव्ह करा'}
             </h3>
           </div>
         </div>
 
-        <!-- 1. APK Upload Card -->
+        <!-- 1. APK File Card -->
         <div class="card">
           <h2>1. APK फाईल व्यवस्थापन</h2>
           <p>सद्यस्थिती: <span id="apkStatusBadge" class="status-badge ${meta.exists ? 'active' : 'inactive'}">
@@ -431,14 +406,14 @@ app.get("/admin", (req, res) => {
 
         <!-- 3. Razorpay Key Card -->
         <div class="card">
-          <h2>3. Razorpay ऑटोमॅटिक पेमेंट की (पर्यायी)</h2>
+          <h2>3. Razorpay १-क्लिक पेमेंट की (महत्त्वाचे)</h2>
           <form id="gwForm">
             <label>Razorpay Key ID:</label>
             <input type="text" name="keyId" id="inputKeyId" value="${gw.keyId || ''}" placeholder="rzp_test_... किंवा rzp_live_...">
             <label>Razorpay Key Secret:</label>
-            <input type="password" name="keySecret" id="inputKeySecret" value="${gw.keySecret || ''}" placeholder="Key Secret">
+            <input type="password" name="keySecret" id="inputKeySecret" value="${gw.keySecret || ''}" placeholder="Key Secret गुप्त कोड">
             <label style="margin-top:10px; cursor:pointer;">
-              <input type="checkbox" name="enabled" id="checkEnabled" ${gw.enabled ? 'checked' : ''} style="width:auto;"> ऑटोमॅटिक 1-क्लिक चालू ठेवा
+              <input type="checkbox" name="enabled" id="checkEnabled" ${gw.enabled ? 'checked' : ''} style="width:auto;"> ऑटोमॅटिक 1-क्लिक चालू ठेवा (Enable)
             </label>
             <label>ॲडमिन पिन:</label>
             <input type="password" name="adminPin" value="0003" required>
@@ -449,13 +424,12 @@ app.get("/admin", (req, res) => {
 
         <!-- Live Payments Table -->
         <div class="card">
-          <h2>4. सर्व डाऊनलोड नोंदी (Live Download Log)</h2>
-          <p style="font-size:0.85rem; color:#94a3b8;">खालील मोबाईल नंबर तुम्ही तुमच्या GPay / बँक स्टेटमेंटमध्ये पाहू शकता.</p>
+          <h2>4. थेट पेमेंट्स आणि डाऊनलोड नोंदी</h2>
           <div style="overflow-x:auto;">
             ${payments.length === 0 ? '<p style="text-align:center; padding:15px; color:#64748b;">कोणतीही नोंद नाही.</p>' : `
               <table>
                 <thead>
-                  <tr><th>#</th><th>तारीख</th><th>मोबाईल क्र.</th><th>पेमेंट पद्धत</th><th>रक्कम</th><th>डाऊनलोड स्थिती</th></tr>
+                  <tr><th>#</th><th>तारीख</th><th>पेमेंट आयडी</th><th>पद्धत</th><th>रक्कम</th><th>डाऊनलोड स्थिती</th></tr>
                 </thead>
                 <tbody>${paymentRows}</tbody>
               </table>
@@ -471,9 +445,7 @@ app.get("/admin", (req, res) => {
           e.preventDefault();
           const btn = document.getElementById('apkBtn');
           const msg = document.getElementById('apkMsg');
-          btn.disabled = true;
-          btn.innerText = "सेव्ह होत आहे...";
-          msg.style.display = "none";
+          btn.disabled = true; btn.innerText = "सेव्ह होत आहे..."; msg.style.display = "none";
           try {
             const res = await fetch('/api/admin/upload-apk', { method: 'POST', body: new FormData(e.target) });
             const data = await res.json();
@@ -485,20 +457,15 @@ app.get("/admin", (req, res) => {
               document.getElementById('apkStatusBadge').className = "status-badge active";
               document.getElementById('apkStatusBadge').innerText = "✓ APK उपलब्ध आहे";
             }
-          } catch(err) {
-            msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!";
-          }
-          btn.disabled = false;
-          btn.innerText = "🚀 APK सेव्ह करा";
+          } catch(err) { msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!"; }
+          btn.disabled = false; btn.innerText = "🚀 APK सेव्ह करा";
         };
 
         document.getElementById('qrForm').onsubmit = async (e) => {
           e.preventDefault();
           const btn = document.getElementById('qrBtn');
           const msg = document.getElementById('qrMsg');
-          btn.disabled = true;
-          btn.innerText = "सेव्ह होत आहे...";
-          msg.style.display = "none";
+          btn.disabled = true; btn.innerText = "सेव्ह होत आहे..."; msg.style.display = "none";
           try {
             const res = await fetch('/api/admin/upload-qr', { method: 'POST', body: new FormData(e.target) });
             const data = await res.json();
@@ -506,23 +473,16 @@ app.get("/admin", (req, res) => {
             msg.style.background = data.success ? "#065f46" : "#7f1d1d";
             msg.style.color = data.success ? "#a7f3d0" : "#fecaca";
             msg.innerText = data.message;
-            if (data.success) {
-              document.getElementById('qrImg').src = '/api/qr-image?t=' + Date.now();
-            }
-          } catch(err) {
-            msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!";
-          }
-          btn.disabled = false;
-          btn.innerText = "📸 QR कोड सेव्ह करा";
+            if (data.success) document.getElementById('qrImg').src = '/api/qr-image?t=' + Date.now();
+          } catch(err) { msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!"; }
+          btn.disabled = false; btn.innerText = "📸 QR कोड सेव्ह करा";
         };
 
         document.getElementById('gwForm').onsubmit = async (e) => {
           e.preventDefault();
           const btn = document.getElementById('gwBtn');
           const msg = document.getElementById('gwMsg');
-          btn.disabled = true;
-          btn.innerText = "सेव्ह होत आहे...";
-          msg.style.display = "none";
+          btn.disabled = true; btn.innerText = "सेव्ह होत आहे..."; msg.style.display = "none";
 
           const payload = {
             keyId: document.getElementById('inputKeyId').value,
@@ -543,14 +503,11 @@ app.get("/admin", (req, res) => {
             msg.style.color = data.success ? "#a7f3d0" : "#fecaca";
             msg.innerText = data.message;
             if (data.success) {
-              document.getElementById('gwStatusBadge').innerText = data.isActive ? "✓ सक्रीय (Active)" : "Manual Mode";
+              document.getElementById('gwStatusBadge').innerText = data.isActive ? "✓ चालू (Active)" : "बंद";
               document.getElementById('gwStatusBadge').style.color = data.isActive ? "#34d399" : "#facc15";
             }
-          } catch(err) {
-            msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!";
-          }
-          btn.disabled = false;
-          btn.innerText = "💾 गेटवे की सेव्ह करा";
+          } catch(err) { msg.style.display = "block"; msg.style.background = "#7f1d1d"; msg.innerText = "एरर आला!"; }
+          btn.disabled = false; btn.innerText = "💾 गेटवे की सेव्ह करा";
         };
       </script>
     </body>
