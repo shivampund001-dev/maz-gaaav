@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <!-- Official Secure Razorpay Script -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
@@ -106,7 +107,7 @@
             <span class="apk-spec-item">📁 साईज: <strong id="specSizeText">लोड होत आहे...</strong></span>
             <span class="apk-spec-item">🤖 व्हर्जन: <strong id="specVersionText">v1.0.0</strong></span>
             <span class="apk-spec-item">💳 फी: <strong>₹१० (फक्त एकदाच)</strong></span>
-            <span class="apk-spec-item">🔒 <strong>100% सुरक्षित</strong></span>
+            <span class="apk-spec-item">🔒 <strong>100% सुरक्षित पेमेंट</strong></span>
           </div>
 
           <!-- Official GPay QR Card -->
@@ -116,7 +117,7 @@
             </div>
             <div class="qr-text-block" style="padding-left:6px;">
               <h5 style="font-size:1.15rem; color:#0F172A; margin-bottom:6px; font-weight:800;">📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
-              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">हा QR स्कॅन करा किंवा UPI ID कॉपी करून ₹१० पाठवून लगेच APK मिळवा.</p>
+              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">फक्त ₹१० चे सुरक्षित पेमेंट करा आणि १ सेकंदात अधिकृत ॲप डाऊनलोड करा.</p>
               <button onclick="openPaymentModal()" style="background:#059669; color:#fff; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
                 ➔ येथे क्लिक करून डाऊनलोड करा
               </button>
@@ -127,7 +128,7 @@
 
         <div class="trust-badges-row" style="margin-top:24px;">
           <span>👥 <strong>५,०००+</strong> स्थानिक प्रवासी</span>
-          <span>⚡ <strong>थेट सर्व्हरवरून</strong> डाऊनलोड</span>
+          <span>⚡ <strong>१ सेकंदात</strong> डाऊनलोड</span>
           <span>📶 <strong>ऑफलाईन</strong> सपोर्ट</span>
         </div>
       </div>
@@ -261,61 +262,38 @@
   </footer>
 
   <!-- =========================================================
-       🔒 FRICTION-FREE PAYMENT MODAL (NO UTR REQUIRED!)
+       🔒 1-CLICK 100% AUTOMATED RAZORPAY PAYMENT MODAL
        ========================================================= -->
   <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
-    <div style="background:#FFFFFF; border-radius:26px; max-width:440px; width:100%; padding:22px 18px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); position:relative; max-height:92vh; overflow-y:auto;">
+    <div style="background:#FFFFFF; border-radius:26px; max-width:440px; width:100%; padding:24px 20px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); position:relative; max-height:92vh; overflow-y:auto;">
       
       <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:36px; height:36px; border-radius:50%; font-size:1.2rem; cursor:pointer; color:#475569; display:flex; align-items:center; justify-content:center;">✕</button>
       
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ झटपट UPI डाऊनलोड</span>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ 1-क्लिक सुरक्षित पेमेंट</span>
       
-      <h3 style="font-size:1.3rem; margin:8px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
-      <p style="font-size:0.82rem; color:#64748B; margin-bottom:12px;">₹१० पाठवून खाली मोबाईल नंबर टाका आणि ॲप मिळवा</p>
+      <h3 style="font-size:1.35rem; margin:10px 0 4px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
+      <p style="font-size:0.84rem; color:#64748B; margin-bottom:16px;">पैसे कट होताच बँक आपोआप १ सेकंदात APK डाऊनलोड करेल</p>
 
-      <!-- 1-CLICK AUTOMATIC RAZORPAY (IF ENABLED) -->
-      <div id="autoGatewayBlock" style="display:none; margin-bottom:14px;">
-        <button onclick="startAutoRazorpay()" style="width:100%; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#fff; font-weight:900; border:none; padding:13px; border-radius:12px; font-size:1rem; cursor:pointer; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
-          ⚡ GPay / PhonePe ने ₹१० Pay करा (1-क्लिक)
+      <!-- 1-CLICK AUTOMATIC BUTTON (NO UTR, NO FORM!) -->
+      <div style="margin-bottom:16px;">
+        <button onclick="startAutoRazorpay()" id="btnAutoPay" style="width:100%; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#fff; font-weight:900; border:none; padding:15px; border-radius:14px; font-size:1.05rem; cursor:pointer; box-shadow:0 6px 18px rgba(5,150,105,0.35); display:flex; align-items:center; justify-content:center; gap:8px;">
+          <span>⚡</span> <span>GPay / PhonePe ने ₹१० Pay करा</span>
         </button>
+        <span style="font-size:0.75rem; color:#059669; font-weight:700; display:block; margin-top:6px;">
+          ✓ UTR टाकण्याची गरज नाही • १ सेकंदात थेट डाऊनलोड
+        </span>
       </div>
 
-      <!-- MAIN PAYMENT SECTION (QR + COPY UPI) -->
-      <div id="manualBlock">
-        <!-- OFFICIAL GPAY QR CARD -->
-        <div style="background:#F8FAFC; border:2px solid #059669; border-radius:18px; padding:8px; display:inline-block; margin-bottom:10px; box-shadow:0 8px 20px rgba(5,150,105,0.12); max-width:210px; width:100%;">
-          <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:12px;">
-          <div style="margin-top:4px;">
-            <span style="font-size:0.85rem; color:#059669; font-weight:900; display:block;">रक्कम: ₹१० • shivampund814@oksbi</span>
-          </div>
-        </div>
-
-        <!-- COPY UPI ID BUTTON -->
-        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:8px 10px; margin-bottom:12px;">
-          <button onclick="copyUpiId()" id="btnCopyUpi" style="width:100%; background:#2563EB; color:#ffffff; border:none; padding:11px 12px; border-radius:10px; font-weight:800; font-size:0.92rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(37,99,235,0.25);">
-            <span>📋</span> <span id="copyBtnText">UPI ID कॉपी करा (shivampund814@oksbi)</span>
-          </button>
-          <span style="font-size:0.72rem; color:#64748B; display:block; text-align:center; margin-top:5px;">
-            (कॉपी करून तुमच्या GPay किंवा PhonePe मध्ये ₹10 पाठवा)
-          </span>
-        </div>
-
-        <!-- 🔒 NO UTR: ONLY MOBILE NUMBER FORM -->
-        <div style="background:#FFFBEB; border:2px solid #FDE68A; border-radius:14px; padding:12px; text-align:left;">
-          <span style="font-size:0.85rem; font-weight:800; color:#92400E; display:block; margin-bottom:6px;">
-            ✅ ₹१० पाठवले? तुमचा मोबाईल नंबर टाका:
-          </span>
-          
-          <label style="display:block; font-size:0.78rem; font-weight:700; color:#374151; margin-bottom:3px;">तुमचा १० अंकी मोबाईल नंबर:</label>
-          <input type="tel" id="userMobile" placeholder="उदा. 9876543210" maxlength="10" style="width:100%; box-sizing:border-box; padding:10px; border:1px solid #CBD5E1; border-radius:8px; font-size:0.95rem; margin-bottom:10px;">
-
-          <button onclick="verifyAndDownload()" id="btnVerifyDownload" style="width:100%; background:#059669; color:#fff; font-weight:900; border:none; padding:13px; border-radius:10px; font-size:1rem; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.35);">
-            ✅ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔
-          </button>
+      <!-- OR SHOW QR BACKUP -->
+      <div style="border-top:1px dashed #E2E8F0; padding-top:14px; margin-top:12px;">
+        <p style="font-size:0.8rem; color:#64748B; margin-bottom:8px; font-weight:600;">किंवा दुसऱ्या मोबाईलने स्कॅन करा:</p>
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:8px; display:inline-block; max-width:170px;">
+          <img src="/api/qr-image" alt="Google Pay QR" style="width:100%; height:auto; display:block; border-radius:8px;">
+          <span style="font-size:0.75rem; color:#059669; font-weight:800; display:block; margin-top:3px;">₹१० • shivampund814@oksbi</span>
         </div>
       </div>
 
-      <div id="paymentStatus" style="font-size:0.88rem; margin-top:10px; font-weight:700; display:none;"></div>
+      <div id="paymentStatus" style="font-size:0.9rem; margin-top:12px; font-weight:800; display:none;"></div>
 
     </div>
   </div>
@@ -326,141 +304,100 @@
       if (e) e.preventDefault();
       document.getElementById('paymentModal').style.display = 'flex';
       document.getElementById('paymentStatus').style.display = 'none';
-      const btn = document.getElementById('btnVerifyDownload');
-      btn.innerText = "✅ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
-      btn.style.background = "#059669";
+      const btn = document.getElementById('btnAutoPay');
       btn.disabled = false;
+      btn.innerHTML = "<span>⚡</span> <span>GPay / PhonePe ने ₹१० Pay करा</span>";
     }
 
     function closePaymentModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    function copyUpiId() {
-      const upiId = "shivampund814@oksbi";
-      navigator.clipboard.writeText(upiId).then(() => {
-        const btnText = document.getElementById('copyBtnText');
-        btnText.innerText = "✅ UPI ID कॉपी झाला! (GPay उघडा)";
-        document.getElementById('btnCopyUpi').style.background = "#059669";
-        
-        const statusDiv = document.getElementById('paymentStatus');
-        statusDiv.innerHTML = "✅ <b>shivampund814@oksbi</b> कॉपी झाला आहे!<br>आता GPay किंवा PhonePe उघडून ₹१० पाठवा आणि खाली मोबाईल नंबर टाकून डाऊनलोड करा.";
-        statusDiv.style.display = "block";
-        statusDiv.style.color = "#059669";
-
-        setTimeout(() => {
-          btnText.innerText = "UPI ID कॉपी करा (shivampund814@oksbi)";
-          document.getElementById('btnCopyUpi').style.background = "#2563EB";
-        }, 4000);
-      }).catch(() => {
-        prompt("हा UPI ID कॉपी करा:", upiId);
-      });
-    }
-
-    // 🔒 Zero-UTR Instant Download Flow
-    async function verifyAndDownload() {
-      const mobile = document.getElementById('userMobile').value.trim();
-      const btn = document.getElementById('btnVerifyDownload');
+    // 🔒 1-Click Razorpay Flow
+    async function startAutoRazorpay() {
+      const btn = document.getElementById('btnAutoPay');
       const statusDiv = document.getElementById('paymentStatus');
-
-      statusDiv.style.display = "none";
-
-      if (!mobile || mobile.length !== 10 || !/^[6-9]\d{9}$/.test(mobile)) {
-        statusDiv.innerText = "❌ कृपया वैध १० अंकी मोबाईल नंबर टाका!";
-        statusDiv.style.color = "#DC2626";
-        statusDiv.style.display = "block";
-        return;
-      }
 
       btn.disabled = true;
-      btn.innerText = "पडताळणी पूर्ण! डाऊनलोड सुरू होत आहे... 🎉";
-      btn.style.background = "#059669";
-
-      try {
-        const res = await fetch('/api/verify-mobile-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mobile })
-        });
-        const data = await res.json();
-        statusDiv.style.display = "block";
-
-        if (data.success && data.downloadUrl) {
-          statusDiv.innerText = "✅ " + data.message;
-          statusDiv.style.color = "#059669";
-
-          setTimeout(() => {
-            window.location.href = data.downloadUrl;
-            setTimeout(() => {
-              closePaymentModal();
-              btn.disabled = false;
-              btn.innerText = "✅ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
-            }, 3000);
-          }, 1000);
-        } else {
-          statusDiv.innerText = "❌ " + (data.message || "एरर आला!");
-          statusDiv.style.color = "#DC2626";
-          btn.disabled = false;
-          btn.innerText = "✅ पेमेंट केले आहे - APK लगेच डाऊनलोड करा ➔";
-        }
-      } catch (err) {
-        statusDiv.style.display = "block";
-        statusDiv.innerText = "❌ सर्व्हरशी संपर्क होऊ शकला नाही.";
-        statusDiv.style.color = "#DC2626";
-        btn.disabled = false;
-      }
-    }
-
-    // Razorpay 1-Click Flow (If configured)
-    async function startAutoRazorpay() {
-      const statusDiv = document.getElementById('paymentStatus');
-      statusDiv.innerText = "सुरक्षित विंडो उघडत आहे...";
+      btn.innerText = "सुरक्षित पेमेंट विंडो उघडत आहे... ⏳";
+      statusDiv.innerText = "कृपया GPay / PhonePe निवडून पिन टाका...";
       statusDiv.style.color = "#059669";
       statusDiv.style.display = "block";
 
       try {
         const res = await fetch('/api/create-order', { method: 'POST' });
         const orderData = await res.json();
-        if (!orderData.autoGateway) return;
+
+        if (!orderData.autoGateway) {
+          statusDiv.innerText = "कृपया ॲडमिन पॅनेल (/admin) मध्ये जाऊन Razorpay की सेव्ह करा!";
+          statusDiv.style.color = "#DC2626";
+          btn.disabled = false;
+          btn.innerHTML = "<span>⚡</span> <span>GPay / PhonePe ने ₹१० Pay करा</span>";
+          return;
+        }
 
         const options = {
           key: orderData.keyId,
           amount: orderData.amount,
           currency: "INR",
-          name: "maz Gaaav App",
-          description: "APK डाऊनलोड फी",
+          name: "maz Gaaav (माझं गाव)",
+          description: "Android APK डाऊनलोड फी (₹१०)",
           order_id: orderData.orderId,
           handler: async function (response) {
-            statusDiv.innerText = "पडताळणी होत आहे... ⏳";
+            btn.innerText = "बँकेकडून खात्री होत आहे... ⏳";
+            statusDiv.innerText = "बँक सिग्नेचर पडताळत आहे... कृपया थांबा";
+
             const verifyRes = await fetch('/api/verify-razorpay', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(response)
             });
             const verifyData = await verifyRes.json();
+
             if (verifyData.success) {
+              btn.innerText = "🎉 डाऊनलोड सुरू झाले!";
               statusDiv.innerText = "✅ " + verifyData.message;
+              statusDiv.style.color = "#059669";
+
               setTimeout(() => {
                 window.location.href = verifyData.downloadUrl;
-                setTimeout(closePaymentModal, 2500);
+                setTimeout(closePaymentModal, 3000);
               }, 1000);
+            } else {
+              statusDiv.innerText = "❌ " + verifyData.message;
+              statusDiv.style.color = "#DC2626";
+              btn.disabled = false;
+              btn.innerHTML = "<span>⚡</span> <span>पुन्हा प्रयत्न करा</span>";
+            }
+          },
+          modal: {
+            ondismiss: function() {
+              btn.disabled = false;
+              btn.innerHTML = "<span>⚡</span> <span>GPay / PhonePe ने ₹१० Pay करा</span>";
+              statusDiv.innerText = "पेमेंट रद्द केले. डाऊनलोड झाले नाही.";
+              statusDiv.style.color = "#DC2626";
             }
           },
           theme: { color: "#059669" }
         };
-        new Razorpay(options).open();
-      } catch (e) {}
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (err) {
+        statusDiv.innerText = "सर्व्हरशी संपर्क होऊ शकला नाही.";
+        statusDiv.style.color = "#DC2626";
+        btn.disabled = false;
+        btn.innerHTML = "<span>⚡</span> <span>GPay / PhonePe ने ₹१० Pay करा</span>";
+      }
     }
 
+    // Dynamic info
     fetch('/api/apk-info')
       .then(res => res.json())
       .then(data => {
         if (data.exists) {
           document.getElementById('specSizeText').innerText = data.sizeFormatted || "लवकरच";
           document.getElementById('specVersionText').innerText = data.version || "v1.0.0";
-        }
-        if (data.autoGateway) {
-          document.getElementById('autoGatewayBlock').style.display = 'block';
         }
       })
       .catch(() => {});
