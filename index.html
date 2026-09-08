@@ -7,25 +7,23 @@
   <meta name="description" content="maz Gaaav (माझं गाव) Android ॲप. माहूर (Mahur) आणि किनवट (Kinwat) बस स्थानक, एसटी बसेस (लालपरी), थेट आगमन वेळ आणि वेळापत्रक पाहण्यासाठी अधिकृत APK डाऊनलोड करा.">
   <meta name="keywords" content="maz Gaaav, Mahur Bus Stand, Kinwat Bus Depot, Mahur Kinwat ST Bus Timetable, Mahurgad bus timing, नांदेड एसटी बस वेळापत्रक">
   
-  <!-- Favicon / Brand Icon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23059669'/%3E%3Crect x='10' y='12' width='28' height='24' rx='4' fill='%23DC2626'/%3E%3Crect x='14' y='16' width='20' height='8' rx='2' fill='%23F8FAFC'/%3E%3Ccircle cx='16' cy='36' r='3' fill='%231E293B'/%3E%3Ccircle cx='32' cy='36' r='3' fill='%231E293B'/%3E%3C/svg%3E">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <!-- Official Secure Razorpay Checkout Script -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
-  <!-- Top Real-time Updates Banner -->
   <div class="top-notice-bar">
     <span class="pulse-dot"></span>
     <span id="topBarMsg"><strong>माहूर &amp; किनवट विशेष:</strong> माहूर बस स्थानक आणि किनवट आगाराच्या सर्व बसेसचे थेट वेळापत्रक ॲपमध्ये उपलब्ध!</span>
   </div>
 
-  <!-- Navbar -->
   <header class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#" class="brand-link" aria-label="maz Gaaav Home">
@@ -71,12 +69,11 @@
   <section class="hero-section" id="hero">
     <div class="container hero-grid">
       
-      <!-- Left Content Column -->
       <div class="hero-content">
         <div class="hero-badge">
           <span>🚌</span>
           <span>माहूर ↔ किनवट बस सेवा विशेष</span>
-          <span style="color:#059669">• प्रीमियम आवृत्ती</span>
+          <span style="color:#059669">• सुरक्षित आवृत्ती</span>
         </div>
 
         <h1 class="hero-title">
@@ -88,7 +85,6 @@
           <strong>maz Gaaav (माझं गाव)</strong> ॲप खास <strong>माहूर बस स्थानक</strong> आणि <strong>किनवट बस आगार</strong> परिसरातील प्रवाशांसाठी आणि भाविकांसाठी तयार केले आहे. माहूर, किनवट, बोधडी, इस्लापूर आणि परिसरातील सर्व एसटी बसेसचे आगमन वेळ आणि रोजचे वेळापत्रक आता एका क्लिकवर पहा!
         </p>
 
-        <!-- CTA Download Box -->
         <div class="cta-download-box">
           <div class="cta-button-group">
             <button onclick="openPaymentModal()" class="btn-primary-download" id="heroDownloadBtn">
@@ -107,39 +103,37 @@
             </button>
           </div>
 
-          <!-- Specs details -->
           <div class="apk-meta-specs" id="apkSpecsRow">
             <span class="apk-spec-item">📁 साईज: <strong id="specSizeText">लोड होत आहे...</strong></span>
             <span class="apk-spec-item">🤖 व्हर्जन: <strong id="specVersionText">v1.0.0</strong></span>
             <span class="apk-spec-item">💳 फी: <strong>₹१० (फक्त एकदाच)</strong></span>
-            <span class="apk-spec-item">🔒 <strong>100% सुरक्षित</strong></span>
+            <span class="apk-spec-item">🔒 <strong>100% सुरक्षित पेमेंट</strong></span>
           </div>
 
-          <!-- Official GPay QR Code Card on Main Page -->
+          <!-- Official GPay QR Card -->
           <div class="qr-download-card" style="padding:16px; align-items:center; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:18px; margin-top:20px; display:flex; gap:16px;">
             <div class="qr-image-wrapper" style="border:2px solid #059669; padding:4px; border-radius:16px; background:#fff; box-shadow:0 4px 14px rgba(5,150,105,0.15); flex-shrink:0;">
               <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:125px; height:auto; display:block; border-radius:12px;" id="heroQrCodeImg">
             </div>
             <div class="qr-text-block" style="padding-left:6px;">
-              <h5 style="font-size:1.15rem; color:#0F172A; margin-bottom:6px; font-weight:800;">📲 GPay ने ₹१० भरा &amp; डाऊनलोड करा</h5>
-              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">हा QR स्कॅन करा किंवा खालील बटण दाबून ₹१० पाठवून लगेच APK मिळवा.</p>
+              <h5 style="font-size:1.15rem; color:#0F172A; margin-bottom:6px; font-weight:800;">📲 सुरक्षित GPay ₹१० पेमेंट</h5>
+              <p style="font-size:0.88rem; color:#475569; line-height:1.45; margin-bottom:12px;">हा QR स्कॅन करून ₹१० पाठवा आणि पेमेंट झाल्यावर सुरक्षित APK लगेच डाऊनलोड करा.</p>
               <button onclick="openPaymentModal()" style="background:#059669; color:#fff; border:none; padding:10px 18px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
-                ➔ येथे क्लिक करून लगेच डाऊनलोड करा
+                ➔ येथे क्लिक करून पेमेंट करा व डाऊनलोड करा
               </button>
             </div>
           </div>
 
         </div>
 
-        <!-- Social Proof Trust Badges -->
         <div class="trust-badges-row" style="margin-top:24px;">
-          <span>👥 <strong>५,०००+</strong> स्थानिक प्रवासी व भाविक</span>
-          <span>⚡ <strong>थेट सर्व्हरवरून</strong> जलद डाऊनलोड</span>
-          <span>📶 <strong>ऑफलाईन</strong> मोड सपोर्ट</span>
+          <span>👥 <strong>५,०००+</strong> स्थानिक प्रवासी</span>
+          <span>⚡ <strong>हाय-स्पीड</strong> डाऊनलोड</span>
+          <span>🔒 <strong>सुरक्षित</strong> बँकिंग</span>
         </div>
       </div>
 
-      <!-- Right Phone Mockup Column -->
+      <!-- Right Mockup Column -->
       <div class="phone-mockup-wrap">
         <div class="phone-screen-tabs" role="tablist">
           <button class="screen-tab-btn active" data-target="screen-live">⏱️ थेट आगमन</button>
@@ -192,10 +186,6 @@
             </button>
           </div>
         </div>
-
-        <p style="font-size: 0.85rem; color: #64748B; margin-top: 14px; text-align: center;">
-          👆 माहूर व किनवट प्रवाशांसाठी थेट लाईव्ह बस ट्रॅकर
-        </p>
       </div>
 
     </div>
@@ -207,7 +197,6 @@
       <div class="section-header-center">
         <span class="section-tag">ॲपची खास वैशिष्ट्ये</span>
         <h2 class="section-title">माहूर &amp; किनवट परिसरासाठी बनवलेले खास ॲप</h2>
-        <p class="section-desc">माहूर तीर्थक्षेत्राचे भाविक, किनवटचे प्रवासी, विद्यार्थी आणि स्थानिक नागरिकांच्या सोयीसाठी.</p>
       </div>
 
       <div class="features-grid">
@@ -216,124 +205,32 @@
           <h4>माहूर-किनवट थेट आगमन वेळ</h4>
           <p>किनवट आगार आणि माहूर बस स्थानकावर बस किती वाजता पोहोचेल याची अचूक मिनिटांची माहिती मिळते.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon-badge">📅</div>
           <h4>संपूर्ण आगार वेळापत्रक</h4>
           <p>माहूर ↔ किनवट, बोधडी, नांदेड, यवतमाळ, आणि शक्तिपीठ दर्शन फेऱ्यांचे संपूर्ण अधिकृत वेळापत्रक.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon-badge">📴</div>
           <h4>ऑफलाईन मोड सपोर्ट</h4>
-          <p>किनवट-माहूर मार्गावर किंवा जंगलाच्या पट्ट्यात मोबाईल रेंज नसली तरी आधी सेव्ह केलेले वेळापत्रक विनाइंटरनेट उघडते.</p>
+          <p>किनवट-माहूर मार्गावर जंगलाच्या पट्ट्यात रेंज नसली तरी आधी सेव्ह केलेले वेळापत्रक विनाइंटरनेट उघडते.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon-badge">🔔</div>
           <h4>बस आगमन अलार्म</h4>
           <p>बस गावात किंवा बस स्टँडवर पोहोचायला ५ मिनिटे असताना मोबाईलमध्ये रिंग वाजून नोटीफिकेशन येते.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon-badge">📞</div>
           <h4>किनवट व माहूर डेपो हेल्पलाईन</h4>
-          <p>किनवट आगार व्यवस्थापक, माहूर बस स्थानक चौकशी कक्ष व नियंत्रण कक्षाचे अधिकृत संपर्क क्रमांक थेट ॲपमध्ये उपलब्ध.</p>
+          <p>किनवट आगार व्यवस्थापक आणि माहूर बस स्थानकाचे अधिकृत संपर्क क्रमांक थेट ॲपमध्ये उपलब्ध.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon-badge">🇮🇳</div>
           <h4>आपली मायबोली मराठी</h4>
-          <p>मोठ्या आणि सुटसुटीत अक्षरात संपूर्ण माहिती अस्सल मराठी भाषेत असल्यामुळे गावातील सर्वजण सहज वापरू शकतात.</p>
+          <p>मोठ्या आणि सुटसुटीत अक्षरात संपूर्ण माहिती अस्सल मराठी भाषेत उपलब्ध आहे.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Step-by-Step Installation Instructions -->
-  <section class="install-section" id="install">
-    <div class="container">
-      <div class="section-header-center">
-        <span class="section-tag">सोपे २ टप्पे</span>
-        <h2 class="section-title">मोबाईलमध्ये ॲप कसे डाऊनलोड करावे?</h2>
-        <p class="section-desc">खालील २ सोप्या स्टेप्समध्ये लगेच ॲप डाऊनलोड करा:</p>
-      </div>
-
-      <div class="install-steps-container" style="grid-template-columns: repeat(2, 1fr); max-width:800px; margin:0 auto 30px;">
-        <div class="install-step-card">
-          <span class="step-num-pill">टप्पा १</span>
-          <span class="step-icon">💳</span>
-          <h4>GPay द्वारे ₹१० भरा</h4>
-          <p>मोठा QR कोड स्कॅन करा किंवा <strong>'GPay ॲप उघडा' / 'UPI ID कॉपी'</strong> द्वारे ₹१० पाठवा.</p>
-        </div>
-
-        <div class="install-step-card">
-          <span class="step-num-pill">टप्पा २</span>
-          <span class="step-icon">⚡</span>
-          <h4>१ सेकंदात APK डाऊनलोड</h4>
-          <p>पैसे पाठवल्यावर खालील <strong>'पेमेंट झाले आहे'</strong> बटण दाबा, APK फाईल थेट डाऊनलोड होईल!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section class="faq-section" id="faq">
-    <div class="container">
-      <div class="section-header-center">
-        <span class="section-tag">वारंवार विचारले जाणारे प्रश्न</span>
-        <h2 class="section-title">काही शंका आहेत का?</h2>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>१. या ॲपमध्ये कोणत्या बस स्टॉपची माहिती आहे?</span>
-            <span class="faq-toggle-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>सध्या या ॲपमध्ये <strong>माहूर बस स्थानक (Mahur)</strong> आणि <strong>किनवट बस आगार (Kinwat)</strong>, तसेच बोधडी व परिसरातील सर्व बसेस आणि फेऱ्यांची माहिती उपलब्ध आहे.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>२. ॲप डाऊनलोड करण्यासाठी फी का आहे?</span>
-            <span class="faq-toggle-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>maz Gaaav ॲपच्या सर्व्हर, इंटरनेट मेंटेनन्स आणि अचूक वेळापत्रक अपडेट्ससाठी केवळ <strong>₹१० नाममात्र शुल्क</strong> ठेवले आहे. एकदा डाऊनलोड केल्यावर ॲप आयुष्यभर मोफत वापरता येते.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>३. पैसे भरल्यावर डाऊनलोड कसे होईल?</span>
-            <span class="faq-toggle-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <p>₹१० पाठवल्यानंतर खालील हिरवे बटण दाबताच १ सेकंदात APK फाईल थेट मोबाईलमध्ये डाऊनलोड व्हायला सुरुवात होते.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bottom CTA Download Section -->
-  <section class="bottom-cta-section">
-    <div class="container bottom-cta-box">
-      <h2>माहूर आणि किनवटमध्ये बस कधी येणार? आता काळजी सोडा!</h2>
-      <p>आजच 'maz Gaaav' ॲप डाऊनलोड करा आणि तुमच्या प्रवासाची अचूक वेळ जाणून घ्या.</p>
-      
-      <button onclick="openPaymentModal()" class="btn-primary-download" style="max-width:380px; margin:0 auto; cursor:pointer;" id="bottomDownloadBtn">
-        <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.414 13.8533 8.1 12 8.1s-3.5902.314-5.1367.8497L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.152 5676l1.9972 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3433-4.1021-2.689-7.5743-6.1185-9.4396"/>
-        </svg>
-        <div class="btn-text-block">
-          <span class="btn-sub-label">Android APK</span>
-          <span class="btn-main-label">Download APK (₹१० Pay करा)</span>
-        </div>
-      </button>
     </div>
   </section>
 
@@ -343,178 +240,242 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <h4 style="color:#34D399; font-size:1.3rem; margin-bottom:8px;">maz Gaaav (माझं गाव)</h4>
-          <p>माहूर बस स्थानक आणि किनवट बस आगार परिसरातील प्रवाशांना बसची अचूक वेळ आणि वेळापत्रक पुरवण्यासाठी समर्पित ॲप्लिकेशन.</p>
+          <p>माहूर व किनवट परिसरातील प्रवाशांना बसची अचूक वेळ देण्यासाठी अधिकृत ॲप.</p>
         </div>
-
         <div class="footer-col">
-          <h5>महत्त्वाचे दुवे</h5>
-          <ul class="footer-links">
-            <li><a href="#hero">मुख्य पान</a></li>
-            <li><a href="#features">वैशिष्ट्ये</a></li>
-            <li><a href="#install">इन्स्टॉलेशन गाईड</a></li>
-            <li><a href="javascript:void(0)" onclick="openPaymentModal()">APK डाऊनलोड (₹१०)</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>डेपो संपर्क व मदत</h5>
+          <h5>डेपो संपर्क</h5>
           <ul class="footer-links">
             <li>📍 किनवट आगार: ०२४६९-२२२०४२</li>
             <li>📍 माहूर बस स्थानक: ०२४६०-२६८२३०</li>
-            <li>💳 अधिकृत UPI ID: <code>shivampund814@oksbi</code></li>
+            <li>💳 अधिकृत UPI: <code>shivampund814@oksbi</code></li>
           </ul>
         </div>
       </div>
-
       <div class="footer-bottom">
-        <p>© 2026 maz Gaaav (माझं गाव) • माहूर &amp; किनवट बस सेवा.</p>
+        <p>© 2026 maz Gaaav (माझं गाव) • सुरक्षित व अधिकृत आवृत्ती.</p>
       </div>
     </div>
   </footer>
 
   <!-- =========================================================
-       ₹10 Instant Download Modal with 2 Mobile Options & QR
+       🔒 HIGH-SECURITY PAYMENT MODAL (NO PAYMENT, NO DOWNLOAD)
        ========================================================= -->
   <div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:99999; align-items:center; justify-content:center; padding:16px;">
     <div style="background:#FFFFFF; border-radius:26px; max-width:440px; width:100%; padding:22px 18px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); position:relative; max-height:92vh; overflow-y:auto;">
       
-      <!-- Close Button -->
       <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:16px; border:none; background:#F1F5F9; width:36px; height:36px; border-radius:50%; font-size:1.2rem; cursor:pointer; color:#475569; display:flex; align-items:center; justify-content:center;">✕</button>
       
-      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">⚡ थेट डाऊनलोड</span>
+      <span style="background:#ECFDF5; color:#059669; font-weight:800; font-size:0.8rem; padding:4px 14px; border-radius:99px; border:1px solid #A7F3D0; display:inline-block;">🔒 सुरक्षित पेमेंट गेटवे</span>
       
       <h3 style="font-size:1.3rem; margin:8px 0 2px; color:#0F172A;">APK डाऊनलोड फी: <span style="color:#059669;">₹१०</span></h3>
-      <p style="font-size:0.82rem; color:#64748B; margin-bottom:12px;">₹१० पाठवून लगेच ॲप डाऊनलोड करा</p>
+      <p style="font-size:0.82rem; color:#64748B; margin-bottom:12px;">पेमेंट पूर्ण झाल्यावरच APK डाऊनलोड सुरू होईल</p>
 
-      <!-- OFFICIAL GPAY QR CODE CARD -->
-      <div style="background:#F8FAFC; border:2px solid #059669; border-radius:18px; padding:8px; display:inline-block; margin-bottom:12px; box-shadow:0 8px 20px rgba(5,150,105,0.12); max-width:230px; width:100%;">
-        <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:12px;" id="modalQrImg">
-        <div style="margin-top:5px;">
-          <span style="font-size:0.88rem; color:#059669; font-weight:900; display:block;">रक्कम: ₹१० • shivampund814@oksbi</span>
-        </div>
-      </div>
-
-      <!-- TWO MOBILE PAYMENT OPTIONS -->
-      <div style="text-align:left; margin-bottom:12px;">
-        <span style="font-size:0.8rem; font-weight:800; color:#1E293B; display:block; margin-bottom:8px; text-align:center;">
-          👇 मोबाईलवरून पेमेंट करण्याचे २ सोपे मार्ग:
-        </span>
-
-        <!-- OPTION 1: Direct App Redirect -->
-        <div style="margin-bottom:8px;">
-          <a href="upi://pay?pa=shivampund814@oksbi&pn=Shivam%20Pund" onclick="triggerAppPay()" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#FFFFFF; font-weight:800; padding:12px 14px; border-radius:12px; font-size:0.95rem; text-decoration:none; box-shadow:0 4px 12px rgba(5,150,105,0.25);">
-            <span>⚡ पर्याय १:</span> <span>थेट GPay / PhonePe ॲप उघडा</span>
-          </a>
-        </div>
-
-        <!-- OPTION 2: Copy UPI ID (Zero Error) -->
-        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:10px;">
-          <button onclick="copyUpiId()" id="btnCopyUpi" style="width:100%; background:#2563EB; color:#ffffff; border:none; padding:11px 12px; border-radius:10px; font-weight:800; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; box-shadow:0 3px 10px rgba(37,99,235,0.2);">
-            <span>📋 पर्याय २:</span> <span id="copyBtnText">UPI ID कॉपी करा (shivampund814@oksbi)</span>
-          </button>
-          <span style="font-size:0.72rem; color:#64748B; display:block; text-align:center; margin-top:5px;">
-            (कॉपी करून तुमच्या GPay मध्ये पेस्ट करा आणि ₹10 पाठवा)
-          </span>
-        </div>
-      </div>
-
-      <!-- Instant 1-Click Download Button (No UTR Required!) -->
-      <div style="padding-top:10px; border-top:1px dashed #E2E8F0;">
-        <p style="font-size:0.82rem; color:#475569; margin-bottom:8px; font-weight:600;">
-          ₹१० पाठवले आहेत?
-        </p>
-        <button onclick="instantDownload()" id="btnInstantDownload" style="width:100%; background:#DC2626; color:#fff; font-weight:800; border:none; padding:13px; border-radius:12px; font-size:1.02rem; cursor:pointer; box-shadow:0 4px 14px rgba(220,38,38,0.3); transition:all 0.2s;">
-          ✅ पेमेंट झाले आहे - APK लगेच डाऊनलोड करा ➔
+      <!-- 1-CLICK AUTOMATIC RAZORPAY BUTTON (SHOWN IF GATEWAY ENABLED) -->
+      <div id="autoGatewayBlock" style="display:none; margin-bottom:14px;">
+        <button onclick="startAutoRazorpay()" style="width:100%; background:linear-gradient(135deg, #059669 0%, #047857 100%); color:#fff; font-weight:900; border:none; padding:14px; border-radius:14px; font-size:1.02rem; cursor:pointer; box-shadow:0 4px 14px rgba(5,150,105,0.35);">
+          ⚡ GPay / PhonePe ने ₹१० Pay करा (1-क्लिक)
         </button>
+        <span style="font-size:0.75rem; color:#059669; font-weight:700; display:block; margin-top:5px;">
+          ✓ बँक सिग्नेचरने १००% सुरक्षित • UTR टाकण्याची गरज नाही
+        </span>
       </div>
 
-      <div id="paymentStatus" style="font-size:0.88rem; margin-top:10px; font-weight:700; color:#059669; display:none;"></div>
+      <!-- MANUAL QR + UTR BLOCK (ALWAYS RELIABLE BACKUP) -->
+      <div id="manualBlock">
+        <!-- OFFICIAL GPAY QR CARD -->
+        <div style="background:#F8FAFC; border:2px solid #059669; border-radius:18px; padding:8px; display:inline-block; margin-bottom:10px; box-shadow:0 8px 20px rgba(5,150,105,0.12); max-width:210px; width:100%;">
+          <img src="/api/qr-image" alt="Google Pay QR - Shivam Pund" style="width:100%; height:auto; display:block; margin:0 auto; border-radius:12px;">
+          <div style="margin-top:4px;">
+            <span style="font-size:0.85rem; color:#059669; font-weight:900; display:block;">रक्कम: ₹१० • shivampund814@oksbi</span>
+          </div>
+        </div>
+
+        <!-- 2 Safe Options -->
+        <div style="text-align:left; margin-bottom:10px;">
+          <a href="upi://pay?pa=shivampund814@oksbi&pn=Shivam%20Pund" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#059669; color:#FFFFFF; font-weight:800; padding:10px 14px; border-radius:10px; font-size:0.9rem; text-decoration:none; margin-bottom:6px;">
+            <span>⚡ पर्याय १:</span> <span>GPay / PhonePe ॲप उघडा</span>
+          </a>
+          <button onclick="copyUpiId()" id="btnCopyUpi" style="width:100%; background:#2563EB; color:#ffffff; border:none; padding:10px 12px; border-radius:10px; font-weight:800; font-size:0.88rem; cursor:pointer;">
+            <span id="copyBtnText">📋 पर्याय २: UPI ID कॉपी करा (shivampund814@oksbi)</span>
+          </button>
+        </div>
+
+        <!-- 🔒 STRICT UTR VERIFICATION -->
+        <div style="background:#FFFBEB; border:2px solid #FDE68A; border-radius:14px; padding:12px; text-align:left;">
+          <span style="font-size:0.85rem; font-weight:800; color:#92400E; display:block; margin-bottom:6px;">
+            ✅ ₹१० पाठवल्यावर UTR टाकून डाऊनलोड करा:
+          </span>
+          
+          <label style="display:block; font-size:0.78rem; font-weight:700; color:#374151; margin-bottom:3px;">तुमचा मोबाईल नंबर:</label>
+          <input type="tel" id="userMobile" placeholder="उदा. 9876543210" maxlength="10" style="width:100%; box-sizing:border-box; padding:9px; border:1px solid #CBD5E1; border-radius:8px; font-size:0.92rem; margin-bottom:8px;">
+
+          <label style="display:block; font-size:0.78rem; font-weight:700; color:#374151; margin-bottom:3px;">GPay मधील १२ अंकी UTR / Reference नंबर:</label>
+          <input type="text" id="userUtr" placeholder="उदा. 4231xxxxxxxx" maxlength="12" style="width:100%; box-sizing:border-box; padding:9px; border:1px solid #CBD5E1; border-radius:8px; font-size:0.92rem; font-family:monospace; margin-bottom:10px;">
+
+          <button onclick="verifyAndDownload()" id="btnVerifyDownload" style="width:100%; background:#DC2626; color:#fff; font-weight:900; border:none; padding:12px; border-radius:10px; font-size:0.98rem; cursor:pointer; box-shadow:0 4px 12px rgba(220,38,38,0.35);">
+            🔒 UTR व्हेरिफाय करा आणि APK डाऊनलोड करा ➔
+          </button>
+        </div>
+      </div>
+
+      <div id="paymentStatus" style="font-size:0.88rem; margin-top:10px; font-weight:700; display:none;"></div>
 
     </div>
   </div>
 
-  <!-- Client-side Logic for Modal & Instant Download -->
+  <!-- Client-side Logic -->
   <script>
+    let isAutoGateway = false;
+
     function openPaymentModal(e) {
       if (e) e.preventDefault();
       document.getElementById('paymentModal').style.display = 'flex';
       document.getElementById('paymentStatus').style.display = 'none';
-      const btn = document.getElementById('btnInstantDownload');
-      btn.innerText = "✅ पेमेंट झाले आहे - APK लगेच डाऊनलोड करा ➔";
-      btn.style.background = "#DC2626";
-      btn.disabled = false;
     }
 
     function closePaymentModal() {
       document.getElementById('paymentModal').style.display = 'none';
     }
 
-    // 100% Working Copy UPI ID function
     function copyUpiId() {
       const upiId = "shivampund814@oksbi";
       navigator.clipboard.writeText(upiId).then(() => {
         const btnText = document.getElementById('copyBtnText');
-        btnText.innerText = "✅ UPI ID कॉपी झाला! (GPay उघडा)";
-        document.getElementById('btnCopyUpi').style.background = "#059669";
-        
-        const statusDiv = document.getElementById('paymentStatus');
-        statusDiv.innerHTML = "✅ <b>shivampund814@oksbi</b> कॉपी झाला आहे!<br>आता GPay किंवा PhonePe उघडून ₹१० पाठवा आणि खालील लाल बटण दाबा.";
-        statusDiv.style.display = "block";
-        statusDiv.style.color = "#059669";
-
-        setTimeout(() => {
-          btnText.innerText = "UPI ID कॉपी करा (shivampund814@oksbi)";
-          document.getElementById('btnCopyUpi').style.background = "#2563EB";
-        }, 4000);
-      }).catch(() => {
-        prompt("हा UPI ID कॉपी करा:", upiId);
+        btnText.innerText = "✅ UPI ID कॉपी झाला! (GPay मध्ये ₹10 पाठवा)";
+        setTimeout(() => btnText.innerText = "📋 पर्याय २: UPI ID कॉपी करा (shivampund814@oksbi)", 4000);
       });
     }
 
-    // When clicked on mobile pay button
-    function triggerAppPay() {
-      setTimeout(() => {
-        const statusDiv = document.getElementById('paymentStatus');
-        statusDiv.innerText = "ॲपमध्ये ₹१० पाठवून झाल्यावर खालील लाल बटण दाबा!";
-        statusDiv.style.display = "block";
-        statusDiv.style.color = "#059669";
-      }, 800);
+    // 🔒 1. Automatic Razorpay Flow
+    async function startAutoRazorpay() {
+      const statusDiv = document.getElementById('paymentStatus');
+      statusDiv.innerText = "सुरक्षित पेमेंट विंडो उघडत आहे...";
+      statusDiv.style.color = "#059669";
+      statusDiv.style.display = "block";
+
+      try {
+        const res = await fetch('/api/create-order', { method: 'POST' });
+        const orderData = await res.json();
+
+        if (!orderData.autoGateway) {
+          statusDiv.innerText = "कृपया खालील QR कोड स्कॅन करून UTR टाका.";
+          return;
+        }
+
+        const options = {
+          key: orderData.keyId,
+          amount: orderData.amount,
+          currency: "INR",
+          name: "maz Gaaav App",
+          description: "अधिकृत APK डाऊनलोड फी",
+          order_id: orderData.orderId,
+          handler: async function (response) {
+            statusDiv.innerText = "पेमेंट सिग्नेचर तपासत आहे... ⏳";
+            const verifyRes = await fetch('/api/verify-razorpay', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(response)
+            });
+            const verifyData = await verifyRes.json();
+            if (verifyData.success) {
+              statusDiv.innerText = "✅ " + verifyData.message;
+              setTimeout(() => {
+                window.location.href = verifyData.downloadUrl;
+                setTimeout(closePaymentModal, 2500);
+              }, 1000);
+            } else {
+              statusDiv.innerText = "❌ " + verifyData.message;
+              statusDiv.style.color = "#DC2626";
+            }
+          },
+          prefill: { name: "प्रवासी", contact: "" },
+          theme: { color: "#059669" }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+      } catch (e) {
+        statusDiv.innerText = "एरर आला. कृपया खालील UTR पद्धत वापरा.";
+        statusDiv.style.color = "#DC2626";
+      }
     }
 
-    // Instant Download (Zero UTR typing!)
-    function instantDownload() {
-      const btn = document.getElementById('btnInstantDownload');
+    // 🔒 2. Manual UTR Verification Flow
+    async function verifyAndDownload() {
+      const mobile = document.getElementById('userMobile').value.trim();
+      const utr = document.getElementById('userUtr').value.trim();
+      const btn = document.getElementById('btnVerifyDownload');
       const statusDiv = document.getElementById('paymentStatus');
 
+      statusDiv.style.display = "none";
+
+      if (!mobile || mobile.length !== 10) {
+        statusDiv.innerText = "❌ कृपया वैध १० अंकी मोबाईल नंबर टाका!";
+        statusDiv.style.color = "#DC2626";
+        statusDiv.style.display = "block";
+        return;
+      }
+
+      if (!utr || utr.length !== 12 || !/^\d{12}$/.test(utr)) {
+        statusDiv.innerText = "❌ कृपया GPay मधील अचूक १२ अंकी UTR नंबर टाका!";
+        statusDiv.style.color = "#DC2626";
+        statusDiv.style.display = "block";
+        return;
+      }
+
       btn.disabled = true;
-      btn.innerText = "पडताळणी पूर्ण! डाऊनलोड सुरू होत आहे... 🎉";
-      btn.style.background = "#059669";
+      btn.innerText = "पडताळणी होत आहे... ⏳";
+      btn.style.background = "#D97706";
 
-      statusDiv.innerText = "APK फाईल तुमच्या मोबाईलमध्ये डाऊनलोड होत आहे...";
-      statusDiv.style.display = "block";
-      statusDiv.style.color = "#059669";
+      try {
+        const res = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mobile, utr })
+        });
+        const data = await res.json();
+        statusDiv.style.display = "block";
 
-      // Trigger APK download instantly!
-      setTimeout(() => {
-        window.location.href = "/api/download-apk";
-        setTimeout(() => {
-          closePaymentModal();
+        if (data.success && data.downloadUrl) {
+          statusDiv.innerText = "✅ " + data.message;
+          statusDiv.style.color = "#059669";
+          btn.style.background = "#059669";
+          btn.innerText = "🎉 डाऊनलोड सुरू झाले!";
+
+          setTimeout(() => {
+            window.location.href = data.downloadUrl;
+            setTimeout(() => {
+              closePaymentModal();
+              btn.disabled = false;
+              btn.innerText = "🔒 UTR व्हेरिफाय करा आणि APK डाऊनलोड करा ➔";
+              btn.style.background = "#DC2626";
+            }, 3000);
+          }, 1000);
+        } else {
+          statusDiv.innerText = "❌ " + (data.message || "पडताळणी अयशस्वी!");
+          statusDiv.style.color = "#DC2626";
           btn.disabled = false;
-          btn.innerText = "✅ पेमेंट झाले आहे - APK लगेच डाऊनलोड करा ➔";
+          btn.innerText = "🔒 UTR व्हेरिफाय करा आणि APK डाऊनलोड करा ➔";
           btn.style.background = "#DC2626";
-        }, 2500);
-      }, 1000);
+        }
+      } catch (err) {
+        statusDiv.style.display = "block";
+        statusDiv.innerText = "❌ सर्व्हरशी संपर्क होऊ शकला नाही.";
+        statusDiv.style.color = "#DC2626";
+        btn.disabled = false;
+      }
     }
 
-    // Load dynamic specs
+    // Check Auto Gateway status
     fetch('/api/apk-info')
       .then(res => res.json())
       .then(data => {
         if (data.exists) {
           document.getElementById('specSizeText').innerText = data.sizeFormatted || "लवकरच";
           document.getElementById('specVersionText').innerText = data.version || "v1.0.0";
-        } else {
-          document.getElementById('specSizeText').innerText = "नवीन आवृत्ती";
+        }
+        if (data.autoGateway) {
+          document.getElementById('autoGatewayBlock').style.display = 'block';
         }
       })
       .catch(() => {});
